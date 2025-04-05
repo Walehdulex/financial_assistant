@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3>Market Overview</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">S&P 500</h5>
+                                    <h2 id="sp500-price" class="mb-0">-</h2>
+                                    <p id="sp500-change" class="card-text">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Nasdaq</h5>
+                                    <h2 id="nasdaq-price" class="mb-0">-</h2>
+                                    <p id="nasdaq-change" class="card-text">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Dow Jones</h5>
+                                    <h2 id="dow-price" class="mb-0">-</h2>
+                                    <p id="dow-change" class="card-text">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card mb-4">
+                                <div class="card-header">Market Movers</div>
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs" id="moversTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="gainers-tab" data-bs-toggle="tab" data-bs-target="#gainers" type="button" role="tab">Top Gainers</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="losers-tab" data-bs-toggle="tab" data-bs-target="#losers" type="button" role="tab">Top Losers</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="volume-tab" data-bs-toggle="tab" data-bs-target="#volume" type="button" role="tab">Most Active</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content mt-3" id="moversTabContent">
+                                        <div class="tab-pane fade show active" id="gainers" role="tabpanel">
+                                            <div id="gainers-container">Loading...</div>
+                                        </div>
+                                        <div class="tab-pane fade" id="losers" role="tabpanel">
+                                            <div id="losers-container">Loading...</div>
+                                        </div>
+                                        <div class="tab-pane fade" id="volume" role="tabpanel">
+                                            <div id="volume-container">Loading...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-header">Stock Lookup</div>
+                                <div class="card-body">
+                                    <form id="stock-search-form">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Enter symbol" id="stock-symbol" required>
+                                            <button class="btn btn-primary" type="submit">Search</button>
+                                        </div>
+                                    </form>
+                                    <div id="search-result"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">Market News</div>
+                                <div class="card-body">
+                                    <div id="market-news-container">Loading...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='market.js') }}"></script>
+{% endblock %}

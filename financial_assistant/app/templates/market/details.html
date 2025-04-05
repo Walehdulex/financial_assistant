@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+   <div class="row mb-4">
+       <div class="col-md-12">
+           <div class="card">
+               <div class="card-header bg-primary text-white">
+                   <div class="d-flex justify-content-between align-items-center">
+                       <h3>{{ symbol }} - {{ company_name }}</h3>
+                       <button class="btn btn-light" id="add-to-portfolio-btn">Add to Portfolio</button>
+                   </div>
+               </div>
+               <div class="card-body">
+                   <div class="row mb-4">
+                       <div class="col-md-3">
+                           <h2 id="current-price">{{ current_price }}</h2>
+                           <p id="price-change" class="{{ 'text-success' if price_change > 0 else 'text-danger' }}">
+                               {{ price_change }} ({{ price_change_percent }}%)
+                           </p>
+                       </div>
+                       <div class="col-md-9">
+                           <div class="btn-group mb-3">
+                               <button class="btn btn-outline-secondary period-btn" data-period="1d">1D</button>
+                               <button class="btn btn-outline-secondary period-btn" data-period="5d">5D</button>
+                               <button class="btn btn-outline-secondary period-btn active" data-period="1m">1M</button>
+                               <button class="btn btn-outline-secondary period-btn" data-period="6m">6M</button>
+                               <button class="btn btn-outline-secondary period-btn" data-period="1y">1Y</button>
+                               <button class="btn btn-outline-secondary period-btn" data-period="5y">5Y</button>
+                           </div>
+                           <canvas id="stock-chart"></canvas>
+                       </div>
+                   </div>
+
+                   <div class="row">
+                       <div class="col-md-8">
+                           <div class="card mb-4">
+                               <div class="card-header">
+                                   <ul class="nav nav-tabs card-header-tabs" id="stockTabs">
+                                       <li class="nav-item">
+                                           <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#overview">Overview</button>
+                                       </li>
+                                       <li class="nav-item">
+                                           <button class="nav-link" data-bs-toggle="tab" data-bs-target="#financials">Financials</button>
+                                       </li>
+                                       <li class="nav-item">
+                                           <button class="nav-link" data-bs-toggle="tab" data-bs-target="#analysis">Analysis</button>
+                                       </li>
+                                       <li class="nav-item">
+                                           <button class="nav-link" data-bs-toggle="tab" data-bs-target="#news">News</button>
+                                       </li>
+                                   </ul>
+                               </div>
+                               <div class="card-body">
+                                   <div class="tab-content">
+                                       <div class="tab-pane fade show active" id="overview">
+                                           <div class="row">
+                                               <div class="col-md-6">
+                                                   <h5>Company Profile</h5>
+                                                   <p>{{ company_description }}</p>
+                                                   <p><strong>Sector:</strong> {{ sector }}</p>
+                                                   <p><strong>Industry:</strong> {{ industry }}</p>
+                                               </div>
+                                               <div class="col-md-6">
+                                                   <h5>Key Statistics</h5>
+                                                   <table class="table table-sm">
+                                                       <tr>
+                                                           <td>Market Cap</td>
+                                                           <td>{{ market_cap }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>P/E Ratio</td>
+                                                           <td>{{ pe_ratio }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>Dividend Yield</td>
+                                                           <td>{{ dividend_yield }}%</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>52 Week High</td>
+                                                           <td>{{ fifty_two_week_high }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>52 Week Low</td>
+                                                           <td>{{ fifty_two_week_low }}</td>
+                                                       </tr>
+                                                   </table>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="tab-pane fade" id="financials">
+                                           <div id="financials-container">Loading financials...</div>
+                                       </div>
+                                       <div class="tab-pane fade" id="analysis">
+                                           <div id="analysis-container">Loading analysis...</div>
+                                       </div>
+                                       <div class="tab-pane fade" id="news">
+                                           <div id="news-container">Loading news...</div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="card mb-4">
+                               <div class="card-header">Price Forecast</div>
+                               <div class="card-body">
+                                   <div id="forecast-container">Loading forecast...</div>
+                               </div>
+                           </div>
+                           <div class="card">
+                               <div class="card-header">Similar Stocks</div>
+                               <div class="card-body">
+                                   <div id="similar-stocks-container">Loading similar stocks...</div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+<!-- Add to Portfolio Modal -->
+<div class="modal fade" id="addToPortfolioModal" tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog">
+       <div class="modal-content">
+           <div class="modal-header bg-primary text-white">
+               <h5 class="modal-title">Add {{ symbol }} to Portfolio</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           <div class="modal-body">
+               <form id="add-to-portfolio-form">
+                   <div class="mb-3">
+                       <label for="quantity" class="form-label">Quantity</label>
+                       <input type="number" class="form-control" id="quantity" min="1" value="1" required>
+                   </div>
+                   <button type="submit" class="btn btn-primary">Add to Portfolio</button>
+               </form>
+           </div>
+       </div>
+   </div>
+</div>
+
+{% endblock %}
