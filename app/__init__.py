@@ -1,10 +1,11 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import Config
 from flask_migrate import Migrate
 from flask_apscheduler import APScheduler
+from datetime import datetime
 
 
 db = SQLAlchemy()
@@ -49,6 +50,7 @@ def create_app(config_class=Config):
         from app.tasks import record_portfolio_values
         from app.models import User,Portfolio, Holding
         from app.routes.settings_routes import bp as settings_bp
+        from app.routes.main_routes import bp as main_bp
 
 
 
@@ -57,6 +59,7 @@ def create_app(config_class=Config):
         app.register_blueprint(portfolio_bp, url_prefix='/portfolio')
         app.register_blueprint(market_bp, url_prefix='/market')
         app.register_blueprint(settings_bp, url_prefix='/settings')
+        app.register_blueprint(main_bp, url_prefix='/')
 
         #Scheduling Daily portfolio value recording
         scheduler.add_job(id='record_portfolio_values', func=record_portfolio_values, trigger='cron', hour=0, minute=0)
@@ -64,8 +67,12 @@ def create_app(config_class=Config):
 
 
         @app.route('/')
-        def index():
-            return redirect(url_for('auth.login'))
+        def home():
+            return render_template('home.html')
+        
+        @app.context_processor
+        def inject_now():
+            return {'now': datetime.utcnow()}
 
         #Database tables
         db.create_all()
