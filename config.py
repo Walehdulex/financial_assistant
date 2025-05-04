@@ -11,7 +11,7 @@ class Config:
     if os.getenv("FLASK_ENV") == "production":
         SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")  # For production
     else:
-        SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "mysql+pymysql://root:Dulex231@localhost/financial_assistant")  # For local or development
+        SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "mysql+pymysql://root:Dulex231@localhost/assistant")  # For local or development
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ALPHA_VANTAGE_API_KEY =os.getenv("ALPHA_VANTAGE_API_KEY")
