@@ -8,8 +8,8 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "your-default-secret-key")
     
     # Default to development environment (local database) unless in production
-    if os.getenv("FLASK_ENV") == "production":
-        SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")  # For production
+    if os.getenv("MYSQLHOST"):
+        SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{os.getenv('MYSQLUSER')}:{os.getenv('MYSQLPASSWORD')}@{os.getenv('MYSQLHOST')}:{os.getenv('MYSQLPORT')}/{os.getenv('MYSQLDATABASE')}" # For production
     else:
         SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "mysql+pymysql://root:Dulex231@localhost/assistant")  # For local or development
 
