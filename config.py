@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "your-default-secret-key")
@@ -19,3 +20,14 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.getenv("MAIL_USERNAME")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+
+    REPORT_DIR = os.path.join(basedir, 'instance', 'reports')
+    os.makedirs(REPORT_DIR, exist_ok=True)
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # Use in-memory SQLite for tests
+    WTF_CSRF_ENABLED = False  # Disable CSRF protection for testing
+    ALPHA_VANTAGE_API_KEY = 'test_key'  # Mock API key for testing
+    SCHEDULER_API_ENABLED = False
+    SCHEDULER_ENABLED = False

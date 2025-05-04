@@ -1,0 +1,123 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Learning Resources</h4>
+    </div>
+    <div class="card-body">
+        <h5>Welcome to the Education Center</h5>
+        <p>
+            Whether you're new to investing or looking to expand your knowledge, our educational resources
+            will help you make informed investment decisions.
+        </p>
+
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-book-half me-2"></i> Beginner Resources</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='investing-basics') }}">Investing Basics: Getting Started</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='stocks') }}">Understanding Stocks</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='diversification') }}">Why Diversification Matters</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='risk-management') }}">Managing Investment Risk</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i> Intermediate Concepts</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='portfolio-theory') }}">Portfolio Theory</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='technical-analysis') }}">Technical Analysis</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='fundamental-analysis') }}">Fundamental Analysis</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='market-indicators') }}">Market Indicators</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ url_for('education.guide', topic='tax-strategies') }}">Tax-Efficient Investing</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-play-circle me-2"></i> Video Resources</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6>Introduction to the Stock Market</h6>
+                                        <p class="text-muted small">Learn the basics of how stock markets work and why they matter.</p>
+                                        <a href="https://youtu.be/SRZ48WTHohw?si=CVHtm71MPgTbcCYC" target="_blank" class="btn btn-outline-primary btn-sm">
+                                            Watch Video
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6>Building a Diversified Portfolio</h6>
+                                        <p class="text-muted small">Understand how to spread risk across different asset classes.</p>
+                                        <button class="btn btn-outline-primary btn-sm">Watch Video</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6>Technical Analysis Tutorial</h6>
+                                        <p class="text-muted small">Learn to read charts and identify patterns to inform trading.</p>
+                                        <button class="btn btn-outline-primary btn-sm">Watch Video</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6>Understanding Market Volatility</h6>
+                                        <p class="text-muted small">Learn how to navigate market ups and downs with confidence.</p>
+                                        <button class="btn btn-outline-primary btn-sm">Watch Video</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

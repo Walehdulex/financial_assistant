@@ -1,0 +1,142 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Investing Basics</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Investing Basics</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Learn the foundational concepts of investing — what it means, how it works, and how to get started safely and smartly.
+        </div>
+
+        <div class="mt-4">
+            <h3>What is Investing?</h3>
+            <p>
+                Investing is the process of putting your money to work to generate returns over time. This can include buying assets like stocks, bonds, real estate, or mutual funds, with the goal of building wealth or generating income.
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <h3>Why Invest?</h3>
+            <ul>
+                <li>Grow your money over time</li>
+                <li>Beat inflation</li>
+                <li>Achieve financial goals (e.g. retirement, education)</li>
+                <li>Build passive income streams</li>
+            </ul>
+        </div>
+
+        <div class="mt-4">
+            <h3>Common Investment Vehicles</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <li><strong>Stocks:</strong> Ownership in companies with potential for growth or dividends.</li>
+                        <li><strong>Bonds:</strong> Loans to companies or governments with fixed interest returns.</li>
+                        <li><strong>Mutual Funds:</strong> Professionally managed portfolios pooling money from many investors.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul>
+                        <li><strong>ETFs:</strong> Funds that trade like stocks and offer built-in diversification.</li>
+                        <li><strong>Real Estate:</strong> Investing in property for rental income or resale gains.</li>
+                        <li><strong>Cash Equivalents:</strong> Low-risk, low-return assets like CDs and money markets.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Basic Investment Principles</h3>
+            <div class="card bg-light">
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li><strong>Start early:</strong> Compounding works best over time.</li>
+                        <li><strong>Diversify:</strong> Don’t put all your eggs in one basket.</li>
+                        <li><strong>Be consistent:</strong> Regular contributions build wealth.</li>
+                        <li><strong>Understand risk:</strong> Higher potential returns usually come with higher risk.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>How to Get Started</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Step 1: Define Your Goals</h5>
+                            <p>Decide what you want to achieve: retirement savings, wealth building, or income generation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Step 2: Choose a Brokerage</h5>
+                            <p>Pick a platform that offers low fees, good tools, and an easy-to-use interface.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Step 3: Select Your Investments</h5>
+                            <p>Start with diversified funds or ETFs if you're unsure where to begin.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Step 4: Monitor and Adjust</h5>
+                            <p>Track performance and rebalance your portfolio regularly based on your goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Beginner Mistakes to Avoid</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Timing the market:</strong> Focus on time *in* the market, not perfect timing.</li>
+                <li class="list-group-item"><strong>Ignoring fees:</strong> Hidden costs can erode returns over time.</li>
+                <li class="list-group-item"><strong>Lack of research:</strong> Know what you’re investing in and why.</li>
+                <li class="list-group-item"><strong>Overreacting to volatility:</strong> Stay the course during market ups and downs.</li>
+            </ul>
+        </div>
+
+        <div class="mt-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4>Continue Learning</h4>
+                    <p>Now that you understand the basics, you can dive deeper into specific strategies:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='stocks') }}" class="btn btn-outline-primary w-100 mb-2">Stocks Basics</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='diversification') }}" class="btn btn-outline-primary w-100 mb-2">Diversification</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='compound-interest') }}" class="btn btn-outline-primary w-100 mb-2">Compound Interest</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -9,12 +9,16 @@ import os
 from functools import lru_cache
 import logging
 
+from app.services.news_service import NewsService
+from app.routes import track_request_time
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 bp = Blueprint('market', __name__)
 market_service = MarketService()
+news_service = NewsService(market_service)
 
 # Cache configuration
 CACHE_TIMEOUT = 300  # 5 minutes
@@ -29,6 +33,7 @@ def market_overview():
 
 @bp.route('/stock/<symbol>')
 @login_required
+@track_request_time
 def stock_details(symbol):
     """Render detailed view for a specific stock"""
     # Get stock data
@@ -56,12 +61,176 @@ def stock_details(symbol):
                            fifty_two_week_high=company_info.get('52_week_high', 'N/A'),
                            fifty_two_week_low=company_info.get('52_week_low', 'N/A'))
 
+# Getting financial data for a specific stock
+@bp.route('/stock/<symbol>/financials')
+@login_required
+def get_stock_financials(symbol):
+    try:
+        params = {
+            'function': 'INCOME_STATEMENT',
+            'symbol': symbol,
+            'apikey': market_service.api_key
+        }
+
+        response = requests.get(market_service.base_url, params=params)
+        data = response.json()
+
+        # Processing the data into a Simplified Format
+        financials = []
+        if 'annualReports' in data:
+            for report in data['annualReports'][:3]: #Last 3 years data
+                financials.append({
+                    'year': report.get('fiscalDateEnding', '').split('-')[0],
+                    'revenue': float(report.get('totalRevenue', 0)),
+                    'grossProfit': float(report.get('grossProfit', 0)),
+                    'netIncome': float(report.get('netIncome', 0)),
+                    'eps': float(report.get('reportedEPS', 0))
+                })
+
+        return jsonify(financials)
+    except Exception as e:
+        logger.error(f"Error fetching financials for {symbol}: {e}")
+        return jsonify({'error': 'Failed to fetch financial data'}), 500
+
+#Getting analysis data for a specific stock
+@bp.route('/stock/<symbol>/analysis')
+@login_required
+def get_stock_analysis(symbol):
+    try:
+        params = {
+            'function': 'OVERVIEW',
+            'symbol': symbol,
+            'apikey': market_service.api_key
+        }
+
+        response = requests.get(market_service.base_url, params=params)
+        data = response.json()
+
+        # Extracting relevant metrics and data
+        analysis = {
+            'pe_ratio': float(data.get('PERatio', 0)) if data.get('PERatio') else None,
+            'eps': float(data.get('EPS', 0)) if data.get('EPS') else None,
+            'peg_ratio': float(data.get('PEGRatio', 0)) if data.get('PEGRatio') else None,
+            'beta': float(data.get('Beta', 0)) if data.get('Beta') else None,
+            'dividend_yield': float(data.get('DividendYield', 0)) * 100 if data.get('DividendYield') else None,
+            'profit_margin': float(data.get('ProfitMargin', 0)) * 100 if data.get('ProfitMargin') else None,
+            'target_price': float(data.get('AnalystTargetPrice', 0)) if data.get('AnalystTargetPrice') else None
+        }
+
+        return jsonify(analysis)
+    except Exception as e:
+        logger.error(f"Error fetching analysis for {symbol}: {e}")
+        return jsonify({'error': 'Failed to fetch analysis data'}), 500
+
+#Getting similar stocks based on sector/industry
+@bp.route('/stock/<symbol>/similar')
+@login_required
+def get_similar_stocks(symbol):
+    try:
+        #Getting the company info to determine sector/industry
+        company_info = get_company_info(symbol)
+
+        if not company_info or 'sector' not in company_info:
+            return jsonify([])
+
+        sector = company_info.get('sector')
+
+        # Predefined similar stocks for common sectors
+        sector_stocks = {
+            'Technology': ['AAPL', 'MSFT', 'GOOGL', 'META', 'NVDA'],
+            'Healthcare': ['JNJ', 'PFE', 'UNH', 'ABBV', 'MRK'],
+            'Financials': ['JPM', 'BAC', 'WFC', 'C', 'GS'],
+            'Consumer Cyclical': ['AMZN', 'TSLA', 'HD', 'MCD', 'NKE'],
+            'Communication Services': ['GOOGL', 'META', 'DIS', 'NFLX', 'VZ']
+        }
+
+        #Getting Stocks in the current Sector
+        similar_stocks = sector_stocks.get(sector, [])
+        similar_stocks = [s for s in similar_stocks if s != symbol][:4]  # Limitting it to 4
+
+        result = []
+        for similar_symbol in similar_stocks:
+            stock_data = market_service.get_stock_data(similar_symbol)
+            if stock_data:
+                result.append({
+                    'symbol': similar_symbol,
+                    'name': stock_data.get('company_name', similar_symbol),
+                    'price': stock_data.get('current_price', 0),
+                    'change_percent': stock_data.get('daily_change_percent', 0)
+                })
+
+        return jsonify(result)
+    except Exception as e:
+        logger.error(f"Error fetching similar stocks for {symbol}: {e}")
+        return jsonify([])
+
+#Getting price forecast for a stock
+@bp.route('/stock/<symbol>/forecast')
+@login_required
+def get_stock_forecast(symbol):
+    try:
+        #Getting historical data to calculate simple forecast
+        params = {
+            'function': 'TIME_SERIES_DAILY',
+            'symbol': symbol,
+            'apikey': market_service.api_key,
+            'outputsize': 'compact'
+        }
+
+        response = requests.get(market_service.base_url, params=params)
+        data = response.json()
+
+        if 'Time Series (Daily)' not in data:
+            return jsonify({'error': 'No data available for forecast'}), 404
+
+        # Extracting closing prices
+        time_series = data['Time Series (Daily)']
+        dates = list(time_series.keys())
+        dates.sort()  # Sorting the data in chronological order
+
+        # Getting the latest 30 days of data
+        latest_prices = []
+        for date in dates[-30:]:
+            latest_prices.append(float(time_series[date]['4. close']))
+
+        # Calculating a simple linear forecast for next 30 days
+        current_price = latest_prices[-1]
+        avg_change = sum(latest_prices[i] - latest_prices[i - 1]
+                         for i in range(1, len(latest_prices))) / (len(latest_prices) - 1)
+
+        forecast_dates = []
+        forecast_prices = []
+
+        for i in range(1, 31):
+            next_date = (datetime.strptime(dates[-1], '%Y-%m-%d') + timedelta(days=i)).strftime('%Y-%m-%d')
+            forecast_dates.append(next_date)
+            forecast_prices.append(current_price + (avg_change * i))
+
+        #Sentiments
+        forecast_sentiment = 'bullish' if avg_change > 0 else 'bearish'
+        sentiment_strength = abs(avg_change / current_price)
+
+        return jsonify({
+            'current_price': current_price,
+            'target_price': forecast_prices[-1],
+            'forecast_dates': forecast_dates,
+            'forecast_prices': forecast_prices,
+            'sentiment': forecast_sentiment,
+            'confidence': min(0.5 + sentiment_strength * 200, 0.9) #Confidence Scale
+        })
+    except Exception as e:
+        logger.error(f"Error generating forecast for {symbol}: {e}")
+        return jsonify({'error': 'Failed to generate forecast'}), 500
+
+
+
+
 
 @bp.route('/indices')
 @login_required
 @lru_cache(maxsize=1)
 def get_indices():
-    """Get current values for major market indices"""
+    """Getting  current values for major market indices"""
     try:
         indices = {}
         # Using ETFs that track the major indices
@@ -197,7 +366,7 @@ def get_market_movers():
 @bp.route('/news')
 @login_required
 def get_market_news():
-    """Get latest market news"""
+    """Getting latest market news"""
     try:
         params = {
             'function': 'NEWS_SENTIMENT',
@@ -205,6 +374,8 @@ def get_market_news():
             'apikey': market_service.api_key,
             'limit': 10
         }
+
+
 
         # Add target stock for more relevant news if provided
         symbol = request.args.get('symbol')

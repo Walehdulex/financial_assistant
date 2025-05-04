@@ -6,7 +6,6 @@ import pandas as pd
 import requests
 from config import Config
 
-
 class RiskService:
     def __init__(self, market_service):
         self.market_service = market_service
@@ -93,7 +92,7 @@ class RiskService:
             }
 
             try:
-                print(f"Fetching historical data for {symbol}...")
+                # print(f"Fetching historical data for {symbol}...")
                 response = requests.get(self.base_url, params=params)
                 result = response.json()
 
@@ -171,7 +170,6 @@ class RiskService:
                 'risk_level': self.determine_risk_level(volatility)
             }
         return risks
-
 
 
 

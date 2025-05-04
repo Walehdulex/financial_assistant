@@ -1,0 +1,112 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Financial Glossary</h4>
+    </div>
+    <div class="card-body">
+        <p>
+            Understanding financial terminology is essential for successful investing. Browse our comprehensive
+            glossary of investment terms below.
+        </p>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" id="glossary-search" placeholder="Search terms...">
+        </div>
+
+        <div class="mt-4">
+            <div class="dropdown mb-4">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="alphaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Jump to Letter
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="alphaDropdown">
+                    {% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
+                    <li><a class="dropdown-item" href="#section-{{ letter }}">{{ letter }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- A Section -->
+            <div id="section-A" class="mb-4">
+                <h5 class="border-bottom pb-2">A</h5>
+
+                <dl>
+                    <dt>Asset</dt>
+                    <dd>Any item of economic value owned by an individual or corporation, especially something that could be converted to cash.</dd>
+
+                    <dt>Annual Report</dt>
+                    <dd>A document published yearly by public companies to describe their operations and financial conditions to shareholders.</dd>
+
+                    <dt>Ask Price</dt>
+                    <dd>The price a seller is willing to accept for a security, also known as the offer price.</dd>
+
+                    <dt>Asset Allocation</dt>
+                    <dd>An investment strategy that aims to balance risk and reward by distributing a portfolio's assets according to an individual's goals, risk tolerance, and investment horizon.</dd>
+                </dl>
+            </div>
+
+            <div id="section-B" class="mb-4">
+                <h5 class="border-bottom pb-2">B</h5>
+
+                <dl>
+                    <dt>Bear Market</dt>
+                    <dd>A market condition in which the prices of securities are falling, and widespread pessimism causes the negative sentiment to be self-sustaining.</dd>
+
+                    <dt>Bond</dt>
+                    <dd>A fixed-income investment that represents a loan made by an investor to a borrower, typically corporate or governmental.</dd>
+
+                    <dt>Beta</dt>
+                    <dd>A measure of the volatility, or systematic risk, of a security or portfolio compared to the market as a whole.</dd>
+
+                    <dt>Broker</dt>
+                    <dd>An individual or firm that charges a fee or commission for executing buy and sell orders submitted by an investor.</dd>
+                </dl>
+            </div>
+
+            <div id="section-C" class="mb-4">
+                <h5 class="border-bottom pb-2">C</h5>
+
+                <dl>
+                    <dt>Capital Gain</dt>
+                    <dd>The profit realized when a capital asset is sold for a higher price than the purchase price.</dd>
+
+                    <dt>Compound Interest</dt>
+                    <dd>Interest calculated on the initial principal and also on the accumulated interest of previous periods.</dd>
+
+                    <dt>Cash Flow</dt>
+                    <dd>The net amount of cash and cash-equivalents being transferred into and out of a business.</dd>
+                </dl>
+            </div>
+
+{#            More data to come Here#}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Glossary search functionality
+        const searchInput = document.getElementById('glossary-search');
+
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            const definitionTerms = document.querySelectorAll('dt');
+
+            definitionTerms.forEach(term => {
+                const definitionDesc = term.nextElementSibling;
+                const termText = term.textContent.toLowerCase();
+                const descText = definitionDesc.textContent.toLowerCase();
+
+                if (termText.includes(searchTerm) || descText.includes(searchTerm)) {
+                    term.style.display = 'block';
+                    definitionDesc.style.display = 'block';
+                } else {
+                    term.style.display = 'none';
+                    definitionDesc.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

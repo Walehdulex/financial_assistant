@@ -1,0 +1,278 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Admin Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text display-4">{{ user_count }}</p>
+                    <a href="{{ url_for('admin.users') }}" class="btn btn-light btn-sm">Manage Users</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Performance Metrics</h5>
+                    <a href="{{ url_for('admin.performance_metrics') }}" class="btn btn-light btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Portfolios</h5>
+                    <p class="card-text display-4">{{ portfolio_count }}</p>
+                    <a href="#" class="btn btn-light btn-sm" id="viewPortfoliosBtn" data-bs-toggle="modal" data-bs-target="#portfolioDetailsModal">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Recommendation Rate</h5>
+                    <p class="card-text display-4">{{ recommendation_rate }}%</p>
+                    <a href="{{ url_for('admin.recommendation_stats') }}" class="btn btn-light btn-sm">View Stats</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Activity</h5>
+                    <p class="card-text display-4">{{ recent_activity_count }}</p>
+                    <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#activityModal">
+                        View Breakdown
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Details Modal -->
+    <div class="modal fade" id="portfolioDetailsModal" tabindex="-1" aria-labelledby="portfolioDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="portfolioDetailsModalLabel">Portfolio Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center" id="portfolioLoadingSpinner">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading portfolio details...</p>
+                    </div>
+                    <div id="portfolioDetailsContent" style="display: none;">
+                        <!-- Portfolio details will be loaded here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Modal -->
+    <div class="modal fade" id="activityModal" tabindex="-1" aria-labelledby="activityModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activityModalLabel">Recent Activity (Last 24 Hours)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            New Portfolios
+                            <span class="badge bg-primary rounded-pill">{{ recent_portfolios }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            New Holdings
+                            <span class="badge bg-primary rounded-pill">{{ recent_holdings }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            New Feedback
+                            <span class="badge bg-success rounded-pill">{{ recent_feedback }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Recent User Registrations
+                </div>
+                <div class="card-body">
+                    <canvas id="registrationChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    System Health
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Database Connection
+                            <span class="badge bg-success rounded-pill">Healthy</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            API Service
+                            <span class="badge bg-success rounded-pill">Healthy</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Background Jobs
+                            <span class="badge bg-success rounded-pill">Running</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Last Backup
+                            <span class="badge bg-success rounded-pill">Today 03:00 AM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Registration chart
+        const ctx = document.getElementById('registrationChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ registration_data.months|tojson }},
+                datasets: [{
+                    label: 'New Users',
+                    data: {{ registration_data.counts|tojson }},
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'User Registrations (Last 6 Months)'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+
+        // Portfolio details modal functionality
+        document.getElementById('viewPortfoliosBtn').addEventListener('click', function() {
+            loadPortfolioDetails();
+        });
+
+        function loadPortfolioDetails() {
+            // Show spinner
+            document.getElementById('portfolioLoadingSpinner').style.display = 'block';
+            document.getElementById('portfolioDetailsContent').style.display = 'none';
+
+            // Fetch portfolio details
+            fetch('/admin/api/portfolio-details')
+                .then(response => response.json())
+                .then(data => {
+                    // Hide spinner
+                    document.getElementById('portfolioLoadingSpinner').style.display = 'none';
+
+                    // Populate content
+                    const contentDiv = document.getElementById('portfolioDetailsContent');
+
+                    if (data.portfolios && data.portfolios.length > 0) {
+                        let html = `
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Portfolio Name</th>
+                                        <th>Holdings</th>
+                                        <th>Value</th>
+                                        <th>Created</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+
+                        data.portfolios.forEach(portfolio => {
+                            html += `
+                                <tr>
+                                    <td>${portfolio.username}</td>
+                                    <td>${portfolio.name}</td>
+                                    <td>${portfolio.holdings_count}</td>
+                                    <td>$${portfolio.value.toFixed(2)}</td>
+                                    <td>${portfolio.created_at}</td>
+                                    <td>
+                                        <a href="/admin/portfolio/${portfolio.id}" class="btn btn-sm btn-primary">View</a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        html += `
+                                </tbody>
+                            </table>
+                        `;
+
+                        contentDiv.innerHTML = html;
+                    } else {
+                        contentDiv.innerHTML = '<div class="alert alert-info">No portfolios found.</div>';
+                    }
+
+                    contentDiv.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error loading portfolio details:', error);
+                    document.getElementById('portfolioLoadingSpinner').style.display = 'none';
+                    document.getElementById('portfolioDetailsContent').innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Error loading portfolio details. Please try again.
+                        </div>
+                    `;
+                    document.getElementById('portfolioDetailsContent').style.display = 'block';
+                });
+        }
+    });
+</script>
+{% endblock %}

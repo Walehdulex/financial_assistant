@@ -1,4 +1,3 @@
-
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -42,6 +41,9 @@ def register():
         elif User.query.filter_by(username=form.username.data).first():
             flash('Username already registered')
             return redirect(url_for('auth.login'))
+        elif form.validate_on_submit():
+            if not form.disclaimer_accepted.data:
+                flash('You must accept the disclaimer to register', 'danger')
 
         user = User(
             username=form.username.data,

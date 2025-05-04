@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}System Performance Metrics{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1>System Performance Metrics</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Average Response Times</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="responseTimeChart"></canvas>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Average (ms)</th>
+                                <th>95th Percentile (ms)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Portfolio Valuation</td>
+                                <td>{{ (metrics.average_response_times.portfolio_value * 1000) | round(2) }}</td>
+                                <td>{{ (metrics.percentile_response_times.portfolio_value * 1000) | round(2) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Risk Analysis</td>
+                                <td>{{ (metrics.average_response_times.risk_analysis * 1000) | round(2) }}</td>
+                                <td>{{ (metrics.percentile_response_times.risk_analysis * 1000) | round(2) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Recommendations</td>
+                                <td>{{ (metrics.average_response_times.recommendations * 1000) | round(2) }}</td>
+                                <td>{{ (metrics.percentile_response_times.recommendations * 1000) | round(2) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Historical Performance</td>
+                                <td>{{ (metrics.average_response_times.historical_performance * 1000) | round(2) }}</td>
+                                <td>{{ (metrics.percentile_response_times.historical_performance * 1000) | round(2) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>System Efficiency</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6>API Success Rate</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ metrics.system_efficiency.api_success_rate }}%;"
+                                 aria-valuenow="{{ metrics.system_efficiency.api_success_rate }}" aria-valuemin="0" aria-valuemax="100">
+                                {{ metrics.system_efficiency.api_success_rate | round(2) }}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6>Cache Hit Rate</h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ metrics.system_efficiency.cache_hit_rate }}%;"
+                                 aria-valuenow="{{ metrics.system_efficiency.cache_hit_rate }}" aria-valuemin="0" aria-valuemax="100">
+                                {{ metrics.system_efficiency.cache_hit_rate | round(2) }}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Response Times by Cache Status</h6>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Average (ms)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cached Responses</td>
+                                    <td>{{ (metrics.system_efficiency.cached_response_time * 1000) | round(2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fresh Responses</td>
+                                    <td>{{ (metrics.system_efficiency.fresh_response_time * 1000) | round(2) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Response Time Chart
+    const ctx = document.getElementById('responseTimeChart').getContext('2d');
+    const responseTimeChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Portfolio Value', 'Risk Analysis', 'Recommendations', 'Historical Performance'],
+            datasets: [{
+                label: 'Average Response Time (ms)',
+                data: [
+                    {{ metrics.average_response_times.portfolio_value * 1000 }},
+                    {{ metrics.average_response_times.risk_analysis * 1000 }},
+                    {{ metrics.average_response_times.recommendations * 1000 }},
+                    {{ metrics.average_response_times.historical_performance * 1000 }}
+                ],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Response Time (ms)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

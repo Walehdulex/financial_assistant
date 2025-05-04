@@ -49,7 +49,7 @@ class HistoryService:
                    .limit(days)
                    .all())
 
-        #Debugging Message
-        print(f"Retrieved {len(history)} history records for portfolio {portfolio_id}")
+        # #Debugging Message
+        # print(f"Retrieved {len(history)} history records for portfolio {portfolio_id}")
 
         return history

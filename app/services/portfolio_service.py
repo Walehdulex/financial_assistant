@@ -4,6 +4,7 @@ from app import db
 from app.models.portfolio import Portfolio, Holding
 from app.services.market_service import MarketService
 
+from app.models.portfolio import PortfolioHistory
 
 
 class PortfolioService:

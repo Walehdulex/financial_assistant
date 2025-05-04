@@ -1,0 +1,726 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Market Indicators</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Market Indicators</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Market indicators help investors gauge the overall health and direction of financial markets. This guide explains key market indicators and how to use them to make more informed investment decisions.
+        </div>
+
+        <div class="mt-4">
+            <h3>Introduction to Market Indicators</h3>
+            <p>
+                Market indicators are statistical metrics used to measure and track the health, sentiment, and potential direction of financial markets. Unlike company-specific metrics, market indicators provide a broader view of market conditions.
+            </p>
+            <p>
+                By understanding and monitoring these indicators, investors can gain valuable insights into market trends, potential turning points, and overall economic conditions that may impact their investment decisions.
+            </p>
+            
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5>Categories of Market Indicators</h5>
+                    <ul>
+                        <li><strong>Economic Indicators:</strong> Measure broader economic conditions that impact markets</li>
+                        <li><strong>Market Breadth Indicators:</strong> Show the extent of market participation in a trend</li>
+                        <li><strong>Sentiment Indicators:</strong> Measure investor psychology and mood</li>
+                        <li><strong>Volatility Indicators:</strong> Gauge market uncertainty and risk</li>
+                        <li><strong>Trend Indicators:</strong> Track the direction and strength of market movements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Economic Indicators</h3>
+            <p>
+                Economic indicators provide data about the state of the economy and can help investors anticipate how markets might perform. These are typically classified as leading, coincident, or lagging indicators.
+            </p>
+            
+            <div class="accordion" id="economicAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingLeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLeading" aria-expanded="true" aria-controls="collapseLeading">
+                            Leading Economic Indicators
+                        </button>
+                    </h2>
+                    <div id="collapseLeading" class="accordion-collapse collapse show" aria-labelledby="headingLeading" data-bs-parent="#economicAccordion">
+                        <div class="accordion-body">
+                            <p>These indicators signal potential changes in the economy before they occur, helping investors anticipate market shifts.</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Indicator</th>
+                                            <th>What It Measures</th>
+                                            <th>Market Implications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Purchasing Managers' Index (PMI)</td>
+                                            <td>Business activity in manufacturing and services sectors</td>
+                                            <td>PMI > 50 suggests expansion; < 50 suggests contraction. Strong readings typically positive for stocks and bearish for bonds</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Housing Starts</td>
+                                            <td>Number of new residential construction projects</td>
+                                            <td>Rising housing starts often signal economic growth, good for cyclical stocks</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Building Permits</td>
+                                            <td>Permits issued for new construction</td>
+                                            <td>Increasing permits suggest future economic activity and consumer confidence</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Retail Sales</td>
+                                            <td>Consumer spending on retail goods</td>
+                                            <td>Strong retail sales typically bullish for consumer discretionary stocks</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Yield Curve</td>
+                                            <td>Spread between short-term and long-term interest rates</td>
+                                            <td>Inverted yield curve (short-term rates higher than long-term) often precedes recessions</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingCoincident">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCoincident" aria-expanded="false" aria-controls="collapseCoincident">
+                            Coincident Economic Indicators
+                        </button>
+                    </h2>
+                    <div id="collapseCoincident" class="accordion-collapse collapse" aria-labelledby="headingCoincident" data-bs-parent="#economicAccordion">
+                        <div class="accordion-body">
+                            <p>These indicators change at approximately the same time as the overall economy, confirming the current state of the business cycle.</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Indicator</th>
+                                            <th>What It Measures</th>
+                                            <th>Market Implications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Gross Domestic Product (GDP)</td>
+                                            <td>Total value of goods and services produced</td>
+                                            <td>Primary measure of economic health; sustained growth typically positive for equities</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Industrial Production</td>
+                                            <td>Output from manufacturing, mining, and utilities</td>
+                                            <td>Reflects current business activity; important for industrial and materials sectors</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Personal Income</td>
+                                            <td>Income received by individuals from all sources</td>
+                                            <td>Rising incomes support consumer spending, benefiting consumer sectors</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manufacturing and Trade Sales</td>
+                                            <td>Sales activity across manufacturing and trade sectors</td>
+                                            <td>Indicates current economic activity; important for cyclical stocks</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingLagging">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLagging" aria-expanded="false" aria-controls="collapseLagging">
+                            Lagging Economic Indicators
+                        </button>
+                    </h2>
+                    <div id="collapseLagging" class="accordion-collapse collapse" aria-labelledby="headingLagging" data-bs-parent="#economicAccordion">
+                        <div class="accordion-body">
+                            <p>These indicators confirm patterns that have already occurred and can help validate the current phase of the business cycle.</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Indicator</th>
+                                            <th>What It Measures</th>
+                                            <th>Market Implications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Unemployment Rate</td>
+                                            <td>Percentage of the labor force without jobs</td>
+                                            <td>Rising unemployment often confirms economic contraction; falling confirms expansion</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Consumer Price Index (CPI)</td>
+                                            <td>Changes in price levels for consumer goods and services</td>
+                                            <td>Rising inflation may lead to interest rate increases, typically negative for bond prices</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Corporate Profits</td>
+                                            <td>Earnings reported by companies</td>
+                                            <td>Confirms business cycle trends; direct impact on stock valuations</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Business Inventories</td>
+                                            <td>Level of unsold goods held by businesses</td>
+                                            <td>Rising inventories may signal slowing demand; falling inventories may indicate increasing demand</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Market Breadth Indicators</h3>
+            <p>
+                Market breadth indicators measure the number of stocks participating in a market move, helping investors determine whether a trend is supported by broad participation or just a few influential stocks.
+            </p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Advance-Decline Line</h5>
+                            <p class="card-text">Tracks the difference between the number of advancing and declining stocks each day, creating a cumulative line over time.</p>
+                            <p class="card-text"><strong>Interpretation:</strong> When the market is rising and the A/D line is also rising, it confirms the uptrend. A divergence (market rising but A/D line falling) may signal a potential reversal.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">New Highs vs. New Lows</h5>
+                            <p class="card-text">Compares the number of stocks reaching 52-week highs against those reaching 52-week lows.</p>
+                            <p class="card-text"><strong>Interpretation:</strong> More new highs suggests market strength; more new lows suggests weakness. Extreme readings can indicate overbought or oversold conditions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Percentage of Stocks Above Moving Average</h5>
+                            <p class="card-text">Measures the percentage of stocks trading above their 50-day or 200-day moving averages.</p>
+                            <p class="card-text"><strong>Interpretation:</strong> High percentages (>80%) suggest overbought conditions; low percentages (<20%) suggest oversold conditions. Also useful for identifying market transitions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">McClellan Oscillator</h5>
+                            <p class="card-text">A momentum indicator derived from net advances (advancing issues minus declining issues), using exponential moving averages.</p>
+                            <p class="card-text"><strong>Interpretation:</strong> Values above zero indicate positive breadth momentum; values below zero indicate negative breadth momentum. Extreme readings and divergences can signal potential reversals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-5">
+            <h3>Sentiment Indicators</h3>
+            <p>
+                Sentiment indicators measure investor psychology and are often used as contrarian indicators. When sentiment reaches extremes, it may signal potential market turning points.
+            </p>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Indicator</th>
+                            <th>What It Measures</th>
+                            <th>Contrarian Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CBOE Volatility Index (VIX)</td>
+                            <td>Measures implied volatility of S&P 500 index options; often called the "fear index"</td>
+                            <td>High VIX (>30) suggests extreme fear, potentially bullish; Low VIX (<15) suggests complacency, potentially bearish</td>
+                        </tr>
+                        <tr>
+                            <td>Put/Call Ratio</td>
+                            <td>Ratio of put options to call options volume</td>
+                            <td>High ratio indicates bearish sentiment, potentially bullish; Low ratio indicates bullish sentiment, potentially bearish</td>
+                        </tr>
+                        <tr>
+                            <td>Bull/Bear Ratio</td>
+                            <td>Sentiment survey of investment newsletter writers or investors</td>
+                            <td>High bullish sentiment may signal a potential top; High bearish sentiment may signal a potential bottom</td>
+                        </tr>
+                        <tr>
+                            <td>Margin Debt</td>
+                            <td>Amount of money borrowed to purchase securities</td>
+                            <td>Rising margin debt indicates increasing speculation; peaks often precede market corrections</td>
+                        </tr>
+                        <tr>
+                            <td>Fund Flows</td>
+                            <td>Movement of money into or out of various investment vehicles</td>
+                            <td>Large inflows to equity funds may indicate excessive optimism; large outflows may indicate excessive pessimism</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card bg-light mt-3">
+                <div class="card-body">
+                    <h5>Why Sentiment Indicators Work as Contrarian Signals</h5>
+                    <p>Sentiment indicators are often most valuable at market extremes due to these behavioral factors:</p>
+                    <ul>
+                        <li><strong>Herd Behavior:</strong> Investors tend to follow the crowd, creating excessive optimism or pessimism</li>
+                        <li><strong>Emotional Decision-Making:</strong> Fear and greed can drive investors to make irrational decisions</li>
+                        <li><strong>Market Positioning:</strong> When most investors are positioned similarly, there's limited capacity to continue the trend</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Volatility Indicators</h3>
+            <p>
+                Volatility indicators measure the rate and magnitude of price movements, helping investors gauge market risk and potential turning points.
+            </p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">CBOE Volatility Index (VIX)</h5>
+                            <p class="card-text">Measures the market's expectation of 30-day volatility based on S&P 500 index options.</p>
+                            <p class="card-text"><strong>Typical Ranges:</strong></p>
+                            <ul>
+                                <li><10: Extremely low volatility, high complacency</li>
+                                <li>10-20: Normal market conditions</li>
+                                <li>20-30: Elevated uncertainty</li>
+                                <li>>30: High fear and uncertainty, often during market stress</li>
+                                <li>>40: Crisis levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Average True Range (ATR)</h5>
+                            <p class="card-text">Measures market volatility by decomposing the entire range of an asset price for a specified period.</p>
+                            <p class="card-text"><strong>Applications:</strong></p>
+                            <ul>
+                                <li>Higher ATR indicates increased volatility</li>
+                                <li>Used to set stop-loss levels and position sizing</li>
+                                <li>Trend changes often accompanied by increasing ATR</li>
+                                <li>Market bottoms often show spike in ATR</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Bollinger Bands Width</h5>
+                            <p class="card-text">Measures the distance between upper and lower Bollinger Bands relative to the middle band.</p>
+                            <p class="card-text"><strong>Interpretation:</strong></p>
+                            <ul>
+                                <li>Widening bands indicate increasing volatility</li>
+                                <li>Narrowing bands indicate decreasing volatility</li>
+                                <li>Extremely narrow bands often precede significant price moves</li>
+                                <li>Can help identify periods of consolidation before breakouts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Historical Volatility</h5>
+                            <p class="card-text">Measures the standard deviation of price changes over a specific period, typically annualized.</p>
+                            <p class="card-text"><strong>Applications:</strong></p>
+                            <ul>
+                                <li>Comparing current volatility to historical norms</li>
+                                <li>Identifying regimes of high and low volatility</li>
+                                <li>Mean reversion: Extreme volatility readings tend to return to average</li>
+                                <li>Evaluating option pricing (higher volatility = higher premiums)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Trend Indicators</h3>
+            <p>
+                Trend indicators help identify the direction and strength of market movements, allowing investors to align with prevailing market trends.
+            </p>
+            
+            <div class="accordion" id="trendAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingMovingAverages">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMovingAverages" aria-expanded="true" aria-controls="collapseMovingAverages">
+                            Moving Averages and Crossovers
+                        </button>
+                    </h2>
+                    <div id="collapseMovingAverages" class="accordion-collapse collapse show" aria-labelledby="headingMovingAverages" data-bs-parent="#trendAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Common Moving Averages</h6>
+                                    <ul>
+                                        <li><strong>50-day MA:</strong> Medium-term trend indicator</li>
+                                        <li><strong>100-day MA:</strong> Intermediate-term trend indicator</li>
+                                        <li><strong>200-day MA:</strong> Long-term trend indicator</li>
+                                    </ul>
+                                    <p><strong>Price vs. MA:</strong> When price is above MA, trend is up; when below, trend is down</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Moving Average Crossovers</h6>
+                                    <ul>
+                                        <li><strong>Golden Cross:</strong> Short-term MA crosses above long-term MA (bullish)</li>
+                                        <li><strong>Death Cross:</strong> Short-term MA crosses below long-term MA (bearish)</li>
+                                        <li><strong>Common Combinations:</strong> 50/200 day (major signals), 5/20 day (short-term signals)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingMovingAverageIndices">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMovingAverageIndices" aria-expanded="false" aria-controls="collapseMovingAverageIndices">
+                            Market Indices Relative to Moving Averages
+                        </button>
+                    </h2>
+                    <div id="collapseMovingAverageIndices" class="accordion-collapse collapse" aria-labelledby="headingMovingAverageIndices" data-bs-parent="#trendAccordion">
+                        <div class="accordion-body">
+                            <p>Major market indices relative to their moving averages can provide important trend signals:</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Signal</th>
+                                            <th>Interpretation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>S&P 500 above its 200-day MA</td>
+                                            <td>Long-term uptrend, generally bullish market environment</td>
+                                        </tr>
+                                        <tr>
+                                            <td>S&P 500 below its 200-day MA</td>
+                                            <td>Long-term downtrend, caution warranted</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Multiple indices crossing below MAs simultaneously</td>
+                                            <td>Broad market weakness, potential trend change</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Multiple indices crossing above MAs simultaneously</td>
+                                            <td>Broad market strength, potential trend change</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Price oscillating around MA</td>
+                                            <td>Sideways or choppy market, unclear trend</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingADX">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseADX" aria-expanded="false" aria-controls="collapseADX">
+                            Average Directional Index (ADX)
+                        </button>
+                    </h2>
+                    <div id="collapseADX" class="accordion-collapse collapse" aria-labelledby="headingADX" data-bs-parent="#trendAccordion">
+                        <div class="accordion-body">
+                            <p>ADX measures the strength of a trend, regardless of its direction.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>ADX Value Interpretation</h6>
+                                    <ul>
+                                        <li><strong>0-25:</strong> Weak trend or no trend (ranging market)</li>
+                                        <li><strong>25-50:</strong> Strong trend developing</li>
+                                        <li><strong>50-75:</strong> Very strong trend</li>
+                                        <li><strong>75-100:</strong> Extremely strong trend (rare)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Applications</h6>
+                                    <ul>
+                                        <li>Helps distinguish between trending and non-trending markets</li>
+                                        <li>Used to confirm trend signals from other indicators</li>
+                                        <li>Rising ADX indicates strengthening trend</li>
+                                        <li>Falling ADX indicates weakening trend</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingMACD">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMACD" aria-expanded="false" aria-controls="collapseMACD">
+                            Moving Average Convergence Divergence (MACD)
+                        </button>
+                    </h2>
+                    <div id="collapseMACD" class="accordion-collapse collapse" aria-labelledby="headingMACD" data-bs-parent="#trendAccordion">
+                        <div class="accordion-body">
+                            <p>MACD is a trend-following momentum indicator that shows the relationship between two moving averages of a security's price.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>MACD Components</h6>
+                                    <ul>
+                                        <li><strong>MACD Line:</strong> Difference between the 12-day and 26-day EMAs</li>
+                                        <li><strong>Signal Line:</strong> 9-day EMA of the MACD Line</li>
+                                        <li><strong>MACD Histogram:</strong> Difference between MACD Line and Signal Line</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Key Signals</h6>
+                                    <ul>
+                                        <li><strong>MACD Line crossing above Signal Line:</strong> Bullish</li>
+                                        <li><strong>MACD Line crossing below Signal Line:</strong> Bearish</li>
+                                        <li><strong>MACD Line crossing zero line:</strong> Change in momentum</li>
+                                        <li><strong>Divergences:</strong> When MACD doesn't confirm price movement, potential reversal signal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Inter-Market Analysis</h3>
+            <p>
+                Inter-market analysis examines relationships between different asset classes and markets to identify trends and potential turning points.
+            </p>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Relationship</th>
+                            <th>Traditional Pattern</th>
+                            <th>Implications</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stocks and Bonds</td>
+                            <td>Typically negative correlation (stocks up, bonds down)</td>
+                            <td>Divergence from pattern may signal economic concerns or monetary policy shifts</td>
+                        </tr>
+                        <tr>
+                            <td>Stocks and Commodities</td>
+                            <td>Often positively correlated in growth periods</td>
+                            <td>Rising commodities with falling stocks may signal inflationary pressures</td>
+                        </tr>
+                        <tr>
+                            <td>Bonds and Dollar</td>
+                            <td>Typically positive correlation</td>
+                            <td>Divergence may signal changing interest rate expectations or foreign capital flows</td>
+                        </tr>
+                        <tr>
+                            <td>Dollar and Commodities</td>
+                            <td>Typically negative correlation</td>
+                            <td>Rising dollar usually pressures commodity prices due to relative pricing effects</td>
+                        </tr>
+                        <tr>
+                            <td>Consumer Discretionary vs. Consumer Staples</td>
+                            <td>Discretionary outperforms in strong economy</td>
+                            <td>Staples outperforming may signal economic weakness ahead</td>
+                        </tr>
+                        <tr>
+                            <td>Small Caps vs. Large Caps</td>
+                            <td>Small caps typically lead in early bull markets</td>
+                            <td>Small caps underperforming may signal risk aversion or economic concerns</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Practical Applications of Market Indicators</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Market Timing</h5>
+                            <p class="card-text">While perfect timing is impossible, indicators can help identify potential entry and exit points:</p>
+                            <ul>
+                                <li>Extreme sentiment readings can signal potential reversals</li>
+                                <li>Trend indicators help align with prevailing direction</li>
+                                <li>Economic indicators help identify business cycle phases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Asset Allocation</h5>
+                            <p class="card-text">Adjusting portfolio allocations based on market conditions:</p>
+                            <ul>
+                                <li>Reducing equity exposure during bearish indicator signals</li>
+                                <li>Increasing defensive positions when economic indicators weaken</li>
+                                <li>Shifting sector allocations based on business cycle indicators</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Sector Rotation</h5>
+                            <p class="card-text">Different sectors perform differently at various stages of the economic cycle:</p>
+                            <ul>
+                                <li><strong>Early Cycle:</strong> Consumer discretionary, industrials</li>
+                                <li><strong>Mid Cycle:</strong> Technology, financials</li>
+                                <li><strong>Late Cycle:</strong> Energy, materials, utilities</li>
+                                <li><strong>Recession:</strong> Consumer staples, healthcare, utilities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Risk Management</h5>
+                            <p class="card-text">Using indicators to adjust risk exposure:</p>
+                            <ul>
+                                <li>Increasing hedges when volatility indicators spike</li>
+                                <li>Tightening stop-losses during weakening breadth</li>
+                                <li>Reducing position sizes during negative trend signals</li>
+                                <li>Increasing cash positions during deteriorating economic indicators</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Creating a Market Indicator Dashboard</h3>
+            <p>
+                Monitoring a comprehensive set of indicators can help provide a more complete picture of market conditions. Consider including:
+            </p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Economic Health</h5>
+                            <ul>
+                                <li>GDP growth rate</li>
+                                <li>Unemployment rate</li>
+                                <li>PMI readings</li>
+                                <li>Leading Economic Index</li>
+                                <li>Yield curve shape</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Market Trends</h5>
+                            <ul>
+                                <li>Major indices vs. 200-day MAs</li>
+                                <li>Sector relative strength</li>
+                                <li>Advance-decline line</li>
+                                <li>New highs vs. new lows</li>
+                                <li>Percentage of stocks above MAs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Risk Metrics</h5>
+                            <ul>
+                                <li>VIX level</li>
+                                <li>Credit spreads</li>
+                                <li>Put/call ratio</li>
+                                <li>Bull/bear sentiment</li>
+                                <li>Margin debt levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Limitations of Market Indicators</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>No perfect indicator:</strong> No single indicator can consistently predict market movements with perfect accuracy
+                </li>
+                <li class="list-group-item">
+                    <strong>Lagging nature:</strong> Many indicators are based on historical data and may not capture rapid market changes
+                </li>
+                <li class="list-group-item">
+                    <strong>Conflicting signals:</strong> Different indicators may provide contradictory signals at the same time
+                </li>
+                <li class="list-group-item">
+                    <strong>Changing correlations:</strong> Relationships between markets and indicators can shift over time, particularly during crises
+                </li>
+                <li class="list-group-item">
+                    <strong>Self-fulfilling prophecy:</strong> Popular indicators may affect market behavior as traders act on their signals
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4>Continue Learning</h4>
+                    <p>Explore these related topics to enhance your investment analysis skills:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='technical-analysis') }}" class="btn btn-outline-primary w-100 mb-2">Technical Analysis</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='fundamental-analysis') }}" class="btn btn-outline-primary w-100 mb-2">Fundamental Analysis</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='portfolio-theory') }}" class="btn btn-outline-primary w-100 mb-2">Portfolio Theory</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

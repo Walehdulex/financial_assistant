@@ -1,6 +1,3 @@
-from datetime import datetime, timedelta
-
-
 from app.services.history_service import HistoryService
 
 
@@ -24,6 +21,7 @@ class PerformanceService:
 
                     gain_loss = current_value - cost_basis
                     gain_loss_percentage = (gain_loss / cost_basis * 100) if cost_basis > 0 else 0
+
 
                     performance_data.append({
                         'symbol': holding.symbol,
@@ -69,17 +67,17 @@ class PerformanceService:
 
             historical_data = []
 
-            # Check if we have any history entries
+            # Checking if we have any history entries
             if not history_entries:
                 return []
 
-            # Calculate cost basis at each point
+            # Calculating cost basis at each point
             total_cost = 0
             for holding in portfolio.holdings:
                 total_cost += holding.purchase_price * holding.quantity
 
             for entry in history_entries:
-                # Calculate return percentage based on the total cost
+                # Calculating return percentage based on the total cost
                 return_percentage = ((entry.total_value - total_cost) / total_cost * 100) if total_cost > 0 else 0
 
                 historical_data.append({
@@ -88,7 +86,7 @@ class PerformanceService:
                     'return_percentage': return_percentage
                 })
 
-            # Sort by date (oldest first)
+            # Sorting by date (oldest first)
             historical_data.sort(key=lambda x: x['date'])
 
             return historical_data

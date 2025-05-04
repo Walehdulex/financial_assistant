@@ -1,0 +1,39 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-warning text-dark">
+        <h4 class="mb-0">Guide Not Found</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            Sorry, the guide for "<strong>{{ topic }}</strong>" is not currently available.
+        </div>
+        
+        <p>Here are some available guides you might be interested in:</p>
+        
+        <div class="row">
+            {% for topic, info in guides.items() %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ info.title }}</h5>
+                        <span class="badge bg-primary">{{ info.level }}</span>
+                        <div class="mt-3">
+                            <a href="{{ url_for('education.guide', topic=topic) }}" class="btn btn-outline-primary btn-sm">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="mt-4">
+            <a href="{{ url_for('education.resources') }}" class="btn btn-primary">
+                <i class="bi bi-arrow-left me-2"></i> Back to Learning Resources
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: #ffffff;
+    color: #aaa;
+    margin-top: 4rem;
+}
+
+/* Simpler CSS with LTR direction */
+.rating {
+    display: flex;
+    text-align: center;
+}
+
+.rating-star {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.rating:hover .rating-star {
+    color: #ffc107;
+}
+
+.rating-star:hover ~ .rating-star {
+    color: #ddd;
+}
+
+.rating-star.active,
+.rating-star.active ~ .rating-star {
+    color: #ffc107;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+.impact-visualization {
+    transition: all 0.3s ease;
+}

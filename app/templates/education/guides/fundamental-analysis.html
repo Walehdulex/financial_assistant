@@ -1,0 +1,651 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Fundamental Analysis</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Fundamental Analysis</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Fundamental analysis evaluates securities by examining related economic, financial, and other qualitative and quantitative factors. Learn how to use fundamental analysis to identify investment opportunities with strong underlying value.
+        </div>
+
+        <div class="mt-4">
+            <h3>Introduction to Fundamental Analysis</h3>
+            <p>
+                Fundamental analysis is a method of evaluating a security to measure its intrinsic value by examining related economic, financial, and other qualitative and quantitative factors. The goal is to determine whether a security is undervalued or overvalued relative to its current market price.
+            </p>
+            <p>
+                Unlike technical analysis, which focuses on price patterns and market statistics, fundamental analysis looks at the underlying factors that influence a company's value and future prospects.
+            </p>
+            
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5>Core Principles of Fundamental Analysis</h5>
+                    <ul>
+                        <li><strong>Intrinsic Value:</strong> Every security has an underlying "true value" that may differ from its market price</li>
+                        <li><strong>Long-Term Approach:</strong> Focuses on long-term trends rather than short-term price movements</li>
+                        <li><strong>Comprehensive Evaluation:</strong> Considers both company-specific factors and broader economic conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Top-Down vs. Bottom-Up Approach</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Top-Down Analysis</h5>
+                            <p class="card-text">Starts with the broader economy, then narrows to sectors and finally individual companies. Useful for asset allocation and sector rotation strategies.</p>
+                            <p class="card-text"><strong>Sequence:</strong> Global/National Economy → Industry/Sector Analysis → Company Selection</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Bottom-Up Analysis</h5>
+                            <p class="card-text">Focuses on individual companies regardless of industry or economic trends. Emphasizes finding companies with strong fundamentals at attractive prices.</p>
+                            <p class="card-text"><strong>Sequence:</strong> Company Analysis → Compare Within Sector → Confirm with Macroeconomic Outlook</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Macroeconomic Analysis</h3>
+            <p>
+                Macroeconomic analysis examines the overall economy and its impact on financial markets. Key indicators to monitor include:
+            </p>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Economic Indicator</th>
+                            <th>What It Measures</th>
+                            <th>Potential Market Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GDP Growth Rate</td>
+                            <td>Overall economic output and expansion</td>
+                            <td>Higher GDP growth typically benefits stocks; slowing growth may benefit bonds</td>
+                        </tr>
+                        <tr>
+                            <td>Inflation Rate</td>
+                            <td>Pace of price increases in the economy</td>
+                            <td>Moderate inflation is good for stocks; high inflation can hurt bonds</td>
+                        </tr>
+                        <tr>
+                            <td>Interest Rates</td>
+                            <td>Cost of borrowing set by central banks</td>
+                            <td>Rising rates tend to pressure stocks and bonds; falling rates are generally supportive</td>
+                        </tr>
+                        <tr>
+                            <td>Unemployment Rate</td>
+                            <td>Percentage of workforce without jobs</td>
+                            <td>Lower unemployment typically supports consumer spending and company earnings</td>
+                        </tr>
+                        <tr>
+                            <td>Consumer Confidence</td>
+                            <td>Optimism/pessimism of consumers</td>
+                            <td>Higher confidence often correlates with increased spending and economic growth</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-3">
+                <h4>Economic Cycles</h4>
+                <p>
+                    Understanding the current phase of the economic cycle can help inform investment decisions:
+                </p>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Expansion</h5>
+                                <p><strong>Characteristics:</strong> GDP growth, falling unemployment, rising corporate profits</p>
+                                <p><strong>Typically favors:</strong> Cyclical stocks, equities over bonds</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Peak</h5>
+                                <p><strong>Characteristics:</strong> High growth, low unemployment, potential inflation concerns</p>
+                                <p><strong>Typically favors:</strong> Late-cycle sectors (energy, materials), inflation hedges</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Contraction/Recession</h5>
+                                <p><strong>Characteristics:</strong> Declining GDP, rising unemployment, falling corporate profits</p>
+                                <p><strong>Typically favors:</strong> Defensive stocks, bonds, cash</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5>Trough</h5>
+                                <p><strong>Characteristics:</strong> Growth bottoming out, high unemployment, economic stimulus</p>
+                                <p><strong>Typically favors:</strong> Value stocks, early-cycle sectors (consumer discretionary)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Industry and Sector Analysis</h3>
+            <p>
+                Industry analysis examines specific sectors of the economy to identify favorable investment opportunities. Key factors to consider include:
+            </p>
+            
+            <ul class="list-group mb-4">
+                <li class="list-group-item">
+                    <strong>Growth prospects:</strong> Is the industry expanding, mature, or declining?
+                </li>
+                <li class="list-group-item">
+                    <strong>Competitive dynamics:</strong> Industry concentration, barriers to entry, threat of substitutes
+                </li>
+                <li class="list-group-item">
+                    <strong>Regulatory environment:</strong> Current regulations and potential changes
+                </li>
+                <li class="list-group-item">
+                    <strong>Technological disruption:</strong> Impact of innovation on industry structure
+                </li>
+                <li class="list-group-item">
+                    <strong>Cyclicality:</strong> Sensitivity to economic cycles
+                </li>
+            </ul>
+            
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5>Porter's Five Forces Model</h5>
+                    <p>A framework for analyzing industry competition and attractiveness:</p>
+                    <ol>
+                        <li><strong>Competitive Rivalry:</strong> Intensity of competition among existing firms</li>
+                        <li><strong>Threat of New Entrants:</strong> Ease with which new competitors can enter the market</li>
+                        <li><strong>Threat of Substitutes:</strong> Availability of alternative products or services</li>
+                        <li><strong>Bargaining Power of Suppliers:</strong> How much control suppliers have over prices</li>
+                        <li><strong>Bargaining Power of Buyers:</strong> How much control customers have over prices</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Company Analysis</h3>
+            <p>
+                Company analysis dives into individual businesses to assess their financial health, competitive position, and growth potential.
+            </p>
+            
+            <div class="accordion" id="companyAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingQualitative">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQualitative" aria-expanded="true" aria-controls="collapseQualitative">
+                            Qualitative Analysis
+                        </button>
+                    </h2>
+                    <div id="collapseQualitative" class="accordion-collapse collapse show" aria-labelledby="headingQualitative" data-bs-parent="#companyAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><strong>Business Model:</strong> How the company generates revenue and profits</li>
+                                        <li><strong>Competitive Advantage:</strong> Sustainable edges (brand, patents, network effects, cost advantages)</li>
+                                        <li><strong>Management Quality:</strong> Leadership track record, execution history, incentive alignment</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><strong>Corporate Governance:</strong> Board structure, shareholder rights, transparency</li>
+                                        <li><strong>Growth Strategy:</strong> Organic growth plans, M&A strategy, new markets</li>
+                                        <li><strong>ESG Factors:</strong> Environmental, social, and governance practices</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingQuantitative">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuantitative" aria-expanded="false" aria-controls="collapseQuantitative">
+                            Quantitative Analysis: Financial Statements
+                        </button>
+                    </h2>
+                    <div id="collapseQuantitative" class="accordion-collapse collapse" aria-labelledby="headingQuantitative" data-bs-parent="#companyAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6>Income Statement</h6>
+                                    <ul>
+                                        <li>Revenue growth trends</li>
+                                        <li>Gross margins</li>
+                                        <li>Operating margins</li>
+                                        <li>Net profit margins</li>
+                                        <li>Earnings per share (EPS)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>Balance Sheet</h6>
+                                    <ul>
+                                        <li>Asset quality</li>
+                                        <li>Debt levels</li>
+                                        <li>Equity position</li>
+                                        <li>Working capital</li>
+                                        <li>Cash position</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>Cash Flow Statement</h6>
+                                    <ul>
+                                        <li>Operating cash flow</li>
+                                        <li>Free cash flow</li>
+                                        <li>Capital expenditures</li>
+                                        <li>Dividend payments</li>
+                                        <li>Share repurchases</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingRatios">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRatios" aria-expanded="false" aria-controls="collapseRatios">
+                            Key Financial Ratios
+                        </button>
+                    </h2>
+                    <div id="collapseRatios" class="accordion-collapse collapse" aria-labelledby="headingRatios" data-bs-parent="#companyAccordion">
+                        <div class="accordion-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Ratio Category</th>
+                                            <th>Key Ratios</th>
+                                            <th>What They Indicate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Valuation Ratios</td>
+                                            <td>P/E, P/S, P/B, EV/EBITDA</td>
+                                            <td>How expensive a stock is relative to earnings, sales, or assets</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Profitability Ratios</td>
+                                            <td>ROE, ROA, ROIC, Profit Margins</td>
+                                            <td>How efficiently a company generates profits</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Liquidity Ratios</td>
+                                            <td>Current Ratio, Quick Ratio</td>
+                                            <td>Ability to meet short-term obligations</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Solvency Ratios</td>
+                                            <td>Debt-to-Equity, Interest Coverage</td>
+                                            <td>Long-term financial stability and debt management</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Efficiency Ratios</td>
+                                            <td>Asset Turnover, Inventory Turnover</td>
+                                            <td>How well a company uses its assets to generate sales</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Growth Ratios</td>
+                                            <td>Sales Growth, EPS Growth</td>
+                                            <td>Rate of business expansion over time</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Valuation Methods</h3>
+            <p>
+                Fundamental analysis uses various methods to determine a company's intrinsic value. Common valuation approaches include:
+            </p>
+            
+            <div class="accordion" id="valuationAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDCF">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDCF" aria-expanded="true" aria-controls="collapseDCF">
+                            Discounted Cash Flow (DCF)
+                        </button>
+                    </h2>
+                    <div id="collapseDCF" class="accordion-collapse collapse show" aria-labelledby="headingDCF" data-bs-parent="#valuationAccordion">
+                        <div class="accordion-body">
+                            <p>Calculates the present value of expected future cash flows. Considered one of the most thorough valuation methods.</p>
+                            <p><strong>Process:</strong></p>
+                            <ol>
+                                <li>Project future cash flows (typically 5-10 years)</li>
+                                <li>Calculate terminal value (value beyond projection period)</li>
+                                <li>Determine appropriate discount rate (usually WACC)</li>
+                                <li>Discount all future cash flows to present value</li>
+                                <li>Sum the present values to find intrinsic value</li>
+                            </ol>
+                            <p><strong>Strengths:</strong> Comprehensive, considers time value of money</p>
+                            <p><strong>Weaknesses:</strong> Highly sensitive to assumptions, complex</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingComparable">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseComparable" aria-expanded="false" aria-controls="collapseComparable">
+                            Comparable Company Analysis
+                        </button>
+                    </h2>
+                    <div id="collapseComparable" class="accordion-collapse collapse" aria-labelledby="headingComparable" data-bs-parent="#valuationAccordion">
+                        <div class="accordion-body">
+                            <p>Values a company based on how similar companies are valued in the market.</p>
+                            <p><strong>Process:</strong></p>
+                            <ol>
+                                <li>Identify comparable companies (similar size, industry, growth)</li>
+                                <li>Calculate relevant multiples (P/E, EV/EBITDA, etc.) for peers</li>
+                                <li>Apply peer multiples to the target company's metrics</li>
+                                <li>Determine a reasonable range of values</li>
+                            </ol>
+                            <p><strong>Strengths:</strong> Simple, market-based, intuitive</p>
+                            <p><strong>Weaknesses:</strong> Difficult to find perfect comparables, may reflect market mispricing</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingPrecedent">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrecedent" aria-expanded="false" aria-controls="collapsePrecedent">
+                            Precedent Transaction Analysis
+                        </button>
+                    </h2>
+                    <div id="collapsePrecedent" class="accordion-collapse collapse" aria-labelledby="headingPrecedent" data-bs-parent="#valuationAccordion">
+                        <div class="accordion-body">
+                            <p>Values a company based on prices paid in similar acquisitions.</p>
+                            <p><strong>Process:</strong></p>
+                            <ol>
+                                <li>Identify relevant past transactions in the industry</li>
+                                <li>Calculate transaction multiples (EV/Revenue, EV/EBITDA)</li>
+                                <li>Apply these multiples to the target company's metrics</li>
+                                <li>Consider control premiums in the valuation</li>
+                            </ol>
+                            <p><strong>Strengths:</strong> Based on actual transaction prices, includes control premiums</p>
+                            <p><strong>Weaknesses:</strong> Historical transactions may not reflect current market conditions, limited transaction data</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAsset">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAsset" aria-expanded="false" aria-controls="collapseAsset">
+                            Asset-Based Valuation
+                        </button>
+                    </h2>
+                    <div id="collapseAsset" class="accordion-collapse collapse" aria-labelledby="headingAsset" data-bs-parent="#valuationAccordion">
+                        <div class="accordion-body">
+                            <p>Values a company based on the net value of its assets.</p>
+                            <p><strong>Approaches:</strong></p>
+                            <ul>
+                                <li><strong>Book Value:</strong> Assets minus liabilities as reported on the balance sheet</li>
+                                <li><strong>Adjusted Book Value:</strong> Book value with certain assets revalued to market</li>
+                                <li><strong>Liquidation Value:</strong> Estimated proceeds if assets were sold in a forced sale</li>
+                                <li><strong>Replacement Value:</strong> Cost to replicate the company's asset base</li>
+                            </ul>
+                            <p><strong>Strengths:</strong> Useful for asset-heavy businesses, provides a value floor</p>
+                            <p><strong>Weaknesses:</strong> Ignores future earnings potential, may undervalue intangible assets</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDividend">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDividend" aria-expanded="false" aria-controls="collapseDividend">
+                            Dividend Discount Model
+                        </button>
+                    </h2>
+                    <div id="collapseDividend" class="accordion-collapse collapse" aria-labelledby="headingDividend" data-bs-parent="#valuationAccordion">
+                        <div class="accordion-body">
+                            <p>Values a stock based on the present value of expected future dividends.</p>
+                            <p><strong>Gordon Growth Model formula:</strong> Value = D₁ / (r - g)</p>
+                            <ul>
+                                <li>D₁ = Expected dividend one year from now</li>
+                                <li>r = Required rate of return</li>
+                                <li>g = Dividend growth rate (assumed constant)</li>
+                            </ul>
+                            <p><strong>Strengths:</strong> Simple to use, focuses on actual cash returned to shareholders</p>
+                            <p><strong>Weaknesses:</strong> Only applicable to dividend-paying companies, sensitive to growth assumptions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Applying Fundamental Analysis: Investment Styles</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Value Investing</h5>
+                            <p class="card-text">Seeks stocks trading below their intrinsic value. Focuses on low price multiples, strong balance sheets, and margin of safety.</p>
+                            <p class="card-text"><strong>Key metrics:</strong> P/E, P/B, dividend yield, free cash flow yield</p>
+                            <p class="card-text"><strong>Notable practitioners:</strong> Benjamin Graham, Warren Buffett</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Growth Investing</h5>
+                            <p class="card-text">Targets companies with above-average growth potential. Willing to pay premium valuations for high growth rates.</p>
+                            <p class="card-text"><strong>Key metrics:</strong> Revenue growth, EPS growth, ROE, addressable market size</p>
+                            <p class="card-text"><strong>Notable practitioners:</strong> Peter Lynch, Philip Fisher</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Quality Investing</h5>
+                            <p class="card-text">Focuses on companies with sustainable competitive advantages, consistent profitability, and strong balance sheets.</p>
+                            <p class="card-text"><strong>Key metrics:</strong> ROIC, profit margin stability, low debt, free cash flow conversion</p>
+                            <p class="card-text"><strong>Notable practitioners:</strong> Charlie Munger, Terry Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Dividend Investing</h5>
+                            <p class="card-text">Emphasizes income generation through dividends, often focusing on established companies with stable cash flows.</p>
+                            <p class="card-text"><strong>Key metrics:</strong> Dividend yield, dividend growth rate, payout ratio, dividend coverage</p>
+                            <p class="card-text"><strong>Notable practitioners:</strong> John Bogle, Geraldine Weiss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Common Challenges in Fundamental Analysis</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Accounting quality concerns:</strong> Financial statements may not always accurately reflect economic reality
+                </li>
+                <li class="list-group-item">
+                    <strong>Forecasting difficulty:</strong> Future growth rates and cash flows are inherently uncertain
+                </li>
+                <li class="list-group-item">
+                    <strong>Time horizon mismatch:</strong> Markets may take considerable time to recognize intrinsic value
+                </li>
+                <li class="list-group-item">
+                    <strong>Information asymmetry:</strong> Company insiders and institutional investors may have access to better information
+                </li>
+                <li class="list-group-item">
+                    <strong>Behavioral biases:</strong> Confirmation bias, recency bias, and other psychological factors can impact analysis
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-5">
+            <h3>Practical Fundamental Analysis Framework</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 1: Understand the Business</h5>
+                            <p class="card-text">Research the company's business model, products/services, industry dynamics, and competitive position.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 2: Assess Industry Trends</h5>
+                            <p class="card-text">Evaluate growth prospects, competitive intensity, regulatory environment, and technological disruption in the industry.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 3: Analyze Financial Statements</h5>
+                            <p class="card-text">Review income statements, balance sheets, and cash flow statements for at least 3-5 years to identify trends and financial health.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 4: Calculate Key Ratios</h5>
+                            <p class="card-text">Compute valuation, profitability, liquidity, and solvency ratios, comparing them to industry benchmarks and historical averages.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 5: Determine Intrinsic Value</h5>
+                            <p class="card-text">Apply valuation methods (DCF, multiples) to estimate fair value, ideally using multiple approaches to cross-check results.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 6: Assess Margin of Safety</h5>
+                            <p class="card-text">Compare intrinsic value to current market price, seeking a sufficient margin of safety before investing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Resources for Fundamental Analysis</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Financial Statements</h5>
+                            <ul>
+                                <li>Annual Reports (10-K)</li>
+                                <li>Quarterly Reports (10-Q)</li>
+                                <li>Earnings Releases</li>
+                                <li>Management Discussion & Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Company Communications</h5>
+                            <ul>
+                                <li>Earnings Call Transcripts</li>
+                                <li>Investor Presentations</li>
+                                <li>Company Guidance</li>
+                                <li>Corporate Websites</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Third-Party Resources</h5>
+                            <ul>
+                                <li>Industry Research Reports</li>
+                                <li>Analyst Reports</li>
+                                <li>Financial News</li>
+                                <li>Economic Data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Financial Databases</h5>
+                            <ul>
+                                <li>SEC EDGAR Database</li>
+                                <li>Financial Websites (Yahoo Finance, Morningstar)</li>
+                                <li>Screening Tools</li>
+                                <li>Historical Financial Data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4>Continue Learning</h4>
+                    <p>Explore these related topics to enhance your investment analysis skills:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='technical-analysis') }}" class="btn btn-outline-primary w-100 mb-2">Technical Analysis</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='market-indicators') }}" class="btn btn-outline-primary w-100 mb-2">Market Indicators</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='portfolio-theory') }}" class="btn btn-outline-primary w-100 mb-2">Portfolio Theory</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

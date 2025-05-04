@@ -1,6 +1,6 @@
 // dashboard.js - JavaScript for the portfolio dashboard page
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Check if we're on the dashboard page
     const dashboardPage = document.getElementById('portfolioValueChart');
     if (!dashboardPage) return;
@@ -105,11 +105,24 @@ function setupModalHandlers() {
         settingsForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            //Getting Selected Sectors
+            let selectedSectors = '';
+            const sectorChecks = document.querySelectorAll('.sector-check:checked');
+            if (sectorChecks && sectorChecks.length > 0) {
+                selectedSectors = Array.from(sectorChecks).map(check => check.value).join(',');
+            }
+
             const settings = {
                 risk_tolerance: document.getElementById('risk_tolerance').value,
                 default_chart_period: document.getElementById('default_chart_period').value,
-                enable_notifications: document.getElementById('enable_notifications').checked
+                enable_notifications: document.getElementById('enable_notifications').checked,
+                investment_goal: document.getElementById('investment_goal')?.value || 'Growth',
+                time_horizon: document.getElementById('time_horizon')?.value || 'Long-term',
+                preferred_sectors: selectedSectors,
+                tax_consideration: document.getElementById('tax_consideration')?.checked || false
             };
+
+            console.log("Submitting settings", settings);
 
             try {
                 const response = await fetch('/settings/preferences', {
@@ -122,10 +135,14 @@ function setupModalHandlers() {
 
                 if (response.ok) {
                     alert('Settings saved successfully!');
-                    $('#settingsModal').modal('hide');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('settingsModal'));
+                    if (modal) modal.hide();
+                } else {
+                    alert('Failed to save settings. Please try again.');
                 }
             } catch (error) {
                 console.error('Error saving settings:', error);
+                alert('An error occurred while saving settings.');
             }
         });
     }
@@ -135,14 +152,14 @@ function setupModalHandlers() {
     if (sellStockSubmitButton) {
         sellStockSubmitButton.addEventListener('click', async () => {
             const symbol = document.getElementById('sell-symbol').value;
-            const currentShares = parseInt(document.getElementById('current-shares').value);
-            const sellQuantity = parseInt(document.getElementById('sell-quantity').value);
+            const currentShares = parseFloat(document.getElementById('current-shares').value);
+            const sellQuantity = parseFloat(document.getElementById('sell-quantity').value);
             const sellPrice = document.getElementById('sell-price').value;
             const sellDate = document.getElementById('sell-date').value;
 
             // Validate required fields
-            if (!sellQuantity || sellQuantity <= 0) {
-                alert('Please enter a valid quantity to sell.');
+            if (isNaN(sellQuantity) || sellQuantity <= 0 || sellQuantity < 0.001) {
+                alert('Please enter a valid quantity to sell(minimum 0.001).');
                 return;
             }
 
@@ -152,7 +169,7 @@ function setupModalHandlers() {
             }
 
             // If selling all shares, use the original remove endpoint
-            if (sellQuantity === currentShares) {
+            if (Math.abs(sellQuantity - currentShares) < 0.0001) {
                 sellAllShares(symbol);
 
                 // Close the modal
@@ -170,7 +187,7 @@ function setupModalHandlers() {
                     },
                     body: JSON.stringify({
                         symbol: symbol,
-                        quantity: sellQuantity,
+                        quantity: parseFloat(sellQuantity),
                         sell_price: sellPrice ? parseFloat(sellPrice) : null,
                         sell_date: sellDate || null
                     })
@@ -202,6 +219,7 @@ function setupModalHandlers() {
 function initializeCharts() {
     const valueCtx = document.getElementById('portfolioValueChart');
     const returnsCtx = document.getElementById('returnsChart');
+    const pieCtx = document.getElementById('portfolio-chart');
 
     if (!valueCtx || !returnsCtx) {
         console.warn('Chart canvas elements not found');
@@ -251,8 +269,36 @@ function initializeCharts() {
             }
         }
     });
+    if (pieCtx) {
+        window.portfolioChart = new Chart(pieCtx.getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [],
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
+                        '#FF9F40', '#8AC249', '#EA5545', '#87BC45', '#27AEEF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Portfolio Composition'
+                    }
+                }
+            }
+        });
+    }
 
-    return { portfolioValueChart, returnsChart };
+    return {portfolioValueChart, returnsChart, portfolioChart: window.portfolioChart};
 }
 
 // Performance Update Function
@@ -474,6 +520,12 @@ async function updateHistoricalPerformance() {
             window.returnsChart.update();
         }
 
+        //Updating pie chart
+        if (window.returnsChart) {
+            window.returnsChart.data.labels = data.dates;
+            window.returnsChart.update();
+        }
+
         console.log('Charts updated with historical data:', data);
     } catch (error) {
         console.error('Error updating charts:', error);
@@ -495,6 +547,7 @@ async function removeStock(symbol, totalQuantity) {
         document.getElementById('sell-symbol').value = symbol;
 
         // Set current shares
+        const formattedQuantity = parseFloat(totalQuantity).toFixed(3).replace(/\.?0+$/, '');
         document.getElementById('current-shares').value = totalQuantity;
 
         // Set default quantity to all shares
@@ -679,15 +732,61 @@ async function loadUserSettings() {
 
         // Set form values
         if (document.getElementById('risk_tolerance')) {
-            document.getElementById('risk_tolerance').value = settings.risk_tolerance;
+            document.getElementById('risk_tolerance').value = settings.risk_tolerance || 'Moderate';
         }
         if (document.getElementById('default_chart_period')) {
-            document.getElementById('default_chart_period').value = settings.default_chart_period;
+            document.getElementById('default_chart_period').value = settings.default_chart_period || '1m';
         }
         if (document.getElementById('enable_notifications')) {
-            document.getElementById('enable_notifications').checked = settings.enable_notifications;
+            document.getElementById('enable_notifications').checked = settings.enable_notifications || false;
+        }
+        if (document.getElementById('investment_goal')) {
+            document.getElementById('investment_goal').value = settings.investment_goal || 'Growth';
+        }
+        if (document.getElementById('time_horizon')) {
+            document.getElementById('time_horizon').value = settings.time_horizon || 'Long-term';
+        }
+        if (document.getElementById('tax_consideration')) {
+            document.getElementById('tax_consideration').checked = settings.tax_consideration || false;
+        }
+
+        // Handling sectors if they exist
+        if (settings.preferred_sectors) {
+            const sectors = settings.preferred_sectors.split(',');
+            sectors.forEach(sector => {
+                const checkbox = document.querySelector(`.sector-check[value="${sector}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
         }
     } catch (error) {
         console.error('Error loading settings:', error);
     }
+}
+
+function setupPushNotifications() {
+  if ('Notification' in window) {
+    Notification.requestPermission().then(function(permission) {
+      if (permission === 'granted') {
+        // Set up websocket or polling for new notifications
+        pollForNewNotifications();
+      }
+    });
+  }
+}
+
+function pollForNewNotifications() {
+  setInterval(() => {
+    fetch('/api/notifications?unread=true&limit=1')
+      .then(response => response.json())
+      .then(data => {
+        if (data.notifications.length > 0 && data.notifications[0].id > lastNotificationId) {
+          const notification = data.notifications[0];
+          new Notification(notification.title, {
+            body: notification.message,
+            icon: '/static/img/notification-icon.png'
+          });
+          lastNotificationId = notification.id;
+        }
+      });
+  }, 30000); // Poll every 30 seconds
 }

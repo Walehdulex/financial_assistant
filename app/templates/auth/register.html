@@ -1,4 +1,3 @@
-<!-- app/templates/auth/register.html -->
 {% extends "base.html" %}
 
 {% block content %}
@@ -41,6 +40,16 @@
                                     <span class="text-danger">{{ error }}</span>
                                 {% endfor %}
                             {% endif %}
+                        </div>
+
+                        <!-- Disclaimer Checkbox -->
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="disclaimerCheck" name="disclaimer_accepted" required>
+                            <label class="form-check-label" for="disclaimerCheck">
+                                <small class="text-muted">
+                                    I acknowledge that this application provides information for educational purposes only and does not constitute financial advice. I understand that I am responsible for my investment decisions.
+                                </small>
+                            </label>
                         </div>
 
                         <div class="d-grid gap-2">

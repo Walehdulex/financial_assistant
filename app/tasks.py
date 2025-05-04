@@ -5,9 +5,6 @@ from app.models.portfolio import Portfolio, PortfolioHistory
 from app.services.market_service import MarketService
 
 
-# from financial_assistant.app.models.portfolio import Portfolio, PortfolioHistory
-# from financial_assistant.app.routes.portfolio_routes import market_service
-# from financial_assistant.app.services.market_service import MarketService
 
 
 #Recording Daily Portfolio Values

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Generate Risk Analysis Report</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('reports.generate_risk_report') }}" method="post">
+                        <div class="mb-3">
+                            <label for="portfolio_id" class="form-label">Portfolio</label>
+                            <select class="form-select" id="portfolio_id" name="portfolio_id" required>
+                                <option value="all">All Portfolios</option>
+                                {% for portfolio in portfolios %}
+                                <option value="{{ portfolio.id }}">{{ portfolio.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">Select a portfolio or choose "All Portfolios" for a combined analysis.</div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i> This report will include volatility analysis, maximum drawdown, Value at Risk (VaR) calculations, and stress test scenarios.
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-graph-up me-1"></i> Generate Risk Analysis
+                            </button>
+                            <a href="{{ url_for('reports.index') }}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

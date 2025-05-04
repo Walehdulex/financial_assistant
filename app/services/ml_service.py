@@ -32,8 +32,7 @@ class MLService:
                     print(f"Failed to generate features for {symbol}")
                     continue
 
-
-                print(f"Feature columns for {symbol}: {features.columns.tolist()}")
+                # print(f"Feature columns for {symbol}: {features.columns.tolist()}")
 
                 #Making the Prediction
                 expected_return, target_price, confidence = self._predict_return(symbol, features, days)
@@ -82,7 +81,7 @@ class MLService:
                 df['date'] = pd.to_datetime(df['date'])
                 df = df.sort_values('date')
 
-                print(f"Retrieved {len(df)} rows of historical data for {symbol}")
+                # print(f"Retrieved {len(df)} rows of historical data for {symbol}")
                 return df
 
             print(f"No Time Series data found for {symbol}")
@@ -95,8 +94,8 @@ class MLService:
     # Generate Feature method
     def _generate_features(self, df):
         """Generating features for prediction model"""
-        print(f"Generating features. DataFrame shape: {df.shape}")
-        print(f"DataFrame columns: {df.columns.tolist()}")
+        # print(f"Generating features. DataFrame shape: {df.shape}")
+        # print(f"DataFrame columns: {df.columns.tolist()}")
 
         df_copy = df.copy()
 
@@ -119,8 +118,8 @@ class MLService:
             # Nan Values drop
             df_copy = df_copy.dropna()
 
-            print(f"After feature generation. DataFrame shape: {df_copy.shape}")
-            print(f"DataFrame columns: {df_copy.columns.tolist()}")
+            # print(f"After feature generation. DataFrame shape: {df_copy.shape}")
+            # print(f"DataFrame columns: {df_copy.columns.tolist()}")
 
             return df_copy
 
@@ -147,25 +146,18 @@ class MLService:
         return rsi
 
     def _predict_return(self, symbol, df, days=30):
-        """Predict future returns based on historical data"""
-        print(f"Starting prediction for {symbol} with {len(df)} rows of data")
-
         if len(df) < 30:
             print(f"Not enough data for {symbol}, returning defaults")
             return 0, 0, 0
 
         try:
-            # Calculate recent return as a baseline prediction
+            # Calculating recent return as a baseline prediction
             if 'return_5d' in df.columns:
                 recent_return = df['return_5d'].dropna().mean() * (days / 5)
             else:
                 recent_return = 0
 
             current_price = df['close'].iloc[-1]
-
-            # Print key data points for debugging
-            print(f"Current price for {symbol}: {current_price}")
-            print(f"Recent return for {symbol}: {recent_return}")
 
             # For more advanced prediction, we need at least 60 days of data
             if len(df) < 60:
@@ -186,7 +178,7 @@ class MLService:
                 target_price = current_price * (1 + recent_return)
                 return recent_return, target_price, 0.5
 
-            print(f"Using features for {symbol}: {features}")
+            # print(f"Using features for {symbol}: {features}")
 
             # Remove NaN values
             df = df.dropna(subset=features + ['target'])
@@ -200,7 +192,7 @@ class MLService:
             X = df[features].iloc[:-30]
             y = df['target'].iloc[:-30]
 
-            print(f"Training data shape for {symbol}: {X.shape}, {y.shape}")
+            # print(f"Training data shape for {symbol}: {X.shape}, {y.shape}")
 
             if len(X) < 10:
                 print(f"Not enough training data for {symbol}")
@@ -214,7 +206,7 @@ class MLService:
 
             # Get the latest data point for prediction
             latest_data = df[features].iloc[-1:].values
-            print(f"Latest data shape for {symbol}: {latest_data.shape}")
+            # print(f"Latest data shape for {symbol}: {latest_data.shape}")
 
             # Make prediction
             predicted_return = model.predict(latest_data)[0]
@@ -228,8 +220,8 @@ class MLService:
             # Calculate target price
             target_price = current_price * (1 + blended_return)
 
-            print(
-                f"Prediction for {symbol}: return={blended_return:.4f}, target=${target_price:.2f}, confidence={confidence:.2f}")
+            # print(
+            #     f"Prediction for {symbol}: return={blended_return:.4f}, target=${target_price:.2f}, confidence={confidence:.2f}")
 
             return blended_return, target_price, confidence
 
@@ -243,75 +235,4 @@ class MLService:
                 return 0, 0, 0.5
 
 
-    # def _predict_return(self, symbol, df, days=30):
-    #     if len(df) < 30:
-    #         return 0, 0, 0
-    #
-    #     # # Check if required features exist
-    #     # required_features = ['sma_5', 'sma_20', 'rsi_14', 'return_1d', 'return_5d', 'volatility']
-    #     # for feature in required_features:
-    #     #     if feature not in df.columns:
-    #     #         print(f"Missing feature: {feature}")
-    #     #         current_price = df['close'].iloc[-1] if 'close' in df.columns and len(df) > 0 else 0
-    #     #         return 0, current_price, 0.5
-    #
-    #     #Calculating predicted return based on recent momentum and trend
-    #     recent_return = df['return_5d'].mean() * (days / 5)
-    #
-    #     # Making sure df has enough data before trying to access elements
-    #     if len(df) > 60:
-    #         df['target'] = df['close'].shift(-30) / df['close'] - 1
-    #
-    #         #Features
-    #         features = ['sma_5', 'sma_20', 'rsi_14', 'return_1d', 'return_5d', 'volatility']
-    #
-    #         train_end = max(0, len(df) - 30)
-    #
-    #         if train_end <= 0:
-    #             # Not enough data for training, use simple prediction
-    #             current_price = df['close'].iloc[-1]
-    #             target_price = current_price * (1 + recent_return)
-    #             return recent_return, target_price, 0.5
-    #
-    #
-    #          #Preparing training Data
-    #         try:
-    #             X = df[features].iloc[:train_end]
-    #             y = df['target'].iloc[:train_end]
-    #
-    #             #Fitting Model
-    #             model = LinearRegression()
-    #             model.fit(X, y)
-    #
-    #             #predicting data for the latest days
-    #             if len(df[features]) > 0:
-    #                 latest_data = df[features].iloc[-1:].values
-    #                 predicted_return = model.predict(latest_data)[0]
-    #
-    #                 #Blending with simple prediction for robustness
-    #                 predicted_return = (predicted_return + recent_return) / 2
-    #
-    #                 #Calculate confidence
-    #                 confidence = min(0.5 + abs(predicted_return) * 5, 0.9) #Higher for stronger signals
-    #
-    #                 #Current price and target price
-    #                 current_price = df['close'].iloc[-1]
-    #                 target_price = current_price * (1 + predicted_return)
-    #
-    #                 return predicted_return, target_price, confidence
-    #             else:
-    #                 #If No data for prediction
-    #                 return recent_return, df['close'].iloc[-1] * (1 + recent_return), 0.5
-    #         except Exception as e:
-    #             print(f"Error in ML prediction for {symbol}: {str(e)}")
-    #             # Fall back to simple prediction
-    #             current_price = df['close'].iloc[-1]
-    #             target_price = current_price * (1 + recent_return)
-    #             return recent_return, target_price, 0.5
-    #
-    #     #Simple model Fallback
-    #     current_price = df['close'].iloc[-1]
-    #     target_price = current_price * (1 + recent_return)
-    #     confidence = 0.5 #Medium confidence
-    #
-    #     return recent_return, target_price, confidence
+

@@ -1,0 +1,762 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Tax-Efficient Investing</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tax-Efficient Investing</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Tax-efficient investing strategies can significantly improve your after-tax returns. This guide covers key concepts and approaches to minimize the tax impact on your investment portfolio.
+        </div>
+
+        <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <strong>Disclaimer:</strong> This guide provides general information and is not intended as tax or legal advice. Tax laws change frequently and vary by jurisdiction. Consult with a qualified tax professional regarding your specific situation.
+        </div>
+
+        <div class="mt-4">
+            <h3>Introduction to Tax-Efficient Investing</h3>
+            <p>
+                Tax-efficient investing focuses on strategies that minimize the tax burden on your investment returns. By understanding how different investments are taxed and utilizing appropriate accounts and strategies, investors can potentially keep more of their returns.
+            </p>
+            <p>
+                The principle "It's not what you earn, but what you keep" highlights the importance of considering after-tax returns when making investment decisions.
+            </p>
+            
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5>The Impact of Taxes on Investment Returns</h5>
+                    <p>Consider two investments with the same pre-tax return of 7% annually:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Tax-Inefficient Investment</h6>
+                            <ul>
+                                <li>Pre-tax return: 7%</li>
+                                <li>Tax rate: 30%</li>
+                                <li>After-tax return: 4.9%</li>
+                                <li>$10,000 grows to $16,289 after 10 years</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Tax-Efficient Investment</h6>
+                            <ul>
+                                <li>Pre-tax return: 7%</li>
+                                <li>Tax rate: 15%</li>
+                                <li>After-tax return: 5.95%</li>
+                                <li>$10,000 grows to $17,866 after 10 years</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mb-0">The tax-efficient approach results in approximately 10% more wealth after just 10 years, with the difference compounding over longer periods.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Understanding Investment Taxation</h3>
+            <p>
+                Different types of investment income are taxed at different rates and times. Understanding these differences is the foundation of tax-efficient investing.
+            </p>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type of Income</th>
+                            <th>Description</th>
+                            <th>Tax Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Interest Income</td>
+                            <td>Income from bonds, CDs, savings accounts</td>
+                            <td>Taxed as ordinary income at your marginal tax rate</td>
+                        </tr>
+                        <tr>
+                            <td>Qualified Dividends</td>
+                            <td>Dividends from most U.S. companies and qualifying foreign corporations</td>
+                            <td>Taxed at preferential long-term capital gains rates (0%, 15%, or 20% depending on income)</td>
+                        </tr>
+                        <tr>
+                            <td>Non-qualified Dividends</td>
+                            <td>Dividends that don't meet qualified dividend criteria, such as REITs</td>
+                            <td>Taxed as ordinary income at your marginal tax rate</td>
+                        </tr>
+                        <tr>
+                            <td>Short-term Capital Gains</td>
+                            <td>Profits from investments held for 1 year or less</td>
+                            <td>Taxed as ordinary income at your marginal tax rate</td>
+                        </tr>
+                        <tr>
+                            <td>Long-term Capital Gains</td>
+                            <td>Profits from investments held for more than 1 year</td>
+                            <td>Taxed at preferential rates (0%, 15%, or 20% depending on income)</td>
+                        </tr>
+                        <tr>
+                            <td>Tax-exempt Interest</td>
+                            <td>Interest from municipal bonds</td>
+                            <td>Generally exempt from federal income tax; may be exempt from state and local taxes for in-state bonds</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card bg-light mt-3">
+                <div class="card-body">
+                    <h5>Additional Investment Taxes</h5>
+                    <ul>
+                        <li><strong>Net Investment Income Tax (NIIT):</strong> 3.8% surtax on investment income for individuals with modified adjusted gross income above certain thresholds</li>
+                        <li><strong>State and Local Taxes:</strong> Vary by location and may apply to all types of investment income</li>
+                        <li><strong>Alternative Minimum Tax (AMT):</strong> May affect taxation of certain municipal bond interest</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Tax-Advantaged Accounts</h3>
+            <p>
+                Using the right type of account for each investment is a cornerstone of tax-efficient investing.
+            </p>
+            
+            <div class="accordion" id="accountsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTaxDeferred">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTaxDeferred" aria-expanded="true" aria-controls="collapseTaxDeferred">
+                            Tax-Deferred Accounts
+                        </button>
+                    </h2>
+                    <div id="collapseTaxDeferred" class="accordion-collapse collapse show" aria-labelledby="headingTaxDeferred" data-bs-parent="#accountsAccordion">
+                        <div class="accordion-body">
+                            <p>Tax-deferred accounts postpone taxes until withdrawal, allowing investments to grow without annual tax drag.</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Account Type</th>
+                                            <th>Key Features</th>
+                                            <th>Best For</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Traditional 401(k)</td>
+                                            <td>
+                                                <ul>
+                                                    <li>Contributions typically reduce current taxable income</li>
+                                                    <li>Employer matching contributions possible</li>
+                                                    <li>Withdrawals taxed as ordinary income</li>
+                                                    <li>Early withdrawal penalties may apply before age 59½</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>High-income earners seeking current tax deductions</li>
+                                                    <li>Those expecting lower tax rates in retirement</li>
+                                                    <li>Investments generating ordinary income</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Traditional IRA</td>
+                                            <td>
+                                                <ul>
+                                                    <li>May provide tax-deductible contributions (income limits apply)</li>
+                                                    <li>Withdrawals taxed as ordinary income</li>
+                                                    <li>Early withdrawal penalties may apply before age 59½</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Those qualifying for deductible contributions</li>
+                                                    <li>Those without access to employer plans</li>
+                                                    <li>High-turnover investments that would generate taxable events in taxable accounts</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>SEP IRA / SIMPLE IRA</td>
+                                            <td>
+                                                <ul>
+                                                    <li>Higher contribution limits than traditional IRAs</li>
+                                                    <li>For self-employed individuals and small business owners</li>
+                                                    <li>Similar tax treatment to traditional IRAs</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Self-employed individuals</li>
+                                                    <li>Small business owners</li>
+                                                    <li>Those wanting higher contribution limits</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tax-Deferred Annuities</td>
+                                            <td>
+                                                <ul>
+                                                    <li>No annual contribution limits</li>
+                                                    <li>Tax-deferred growth potential</li>
+                                                    <li>Various payout options available</li>
+                                                    <li>Often have higher fees than other tax-deferred options</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Investors who've maxed out other tax-advantaged accounts</li>
+                                                    <li>Those seeking additional tax-deferred growth</li>
+                                                    <li>Those wanting lifetime income guarantees (with certain types)</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTaxFree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTaxFree" aria-expanded="false" aria-controls="collapseTaxFree">
+                            Tax-Free Accounts
+                        </button>
+                    </h2>
+                    <div id="collapseTaxFree" class="accordion-collapse collapse" aria-labelledby="headingTaxFree" data-bs-parent="#accountsAccordion">
+                        <div class="accordion-body">
+                            <p>Tax-free accounts are funded with after-tax dollars but potentially provide tax-free growth and qualified withdrawals.</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Account Type</th>
+                                            <th>Key Features</th>
+                                            <th>Best For</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Roth 401(k)</td>
+                                            <td>
+                                                <ul>
+                                                    <li>Funded with after-tax contributions</li>
+                                                    <li>Qualified withdrawals completely tax-free</li>
+                                                    <li>No required minimum distributions if rolled to Roth IRA</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Younger investors with growth potential</li>
+                                                    <li>Those expecting higher tax rates in retirement</li>
+                                                    <li>High-growth investments</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Roth IRA</td>
+                                            <td>
+                                                <ul>
+                                                    <li>Income limits for direct contributions</li>
+                                                    <li>Can access contributions (not earnings) without penalty</li>
+                                                    <li>No required minimum distributions during owner's lifetime</li>
+                                                    <li>Backdoor Roth IRA conversions possible for high-income earners</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Long-term investors seeking tax-free growth</li>
+                                                    <li>Those wanting flexibility to access contributions</li>
+                                                    <li>High-growth, aggressive investments</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Health Savings Account (HSA)</td>
+                                            <td>
+                                                <ul>
+                                                    <li>Triple tax advantage: tax-deductible contributions, tax-free growth, tax-free qualified medical withdrawals</li>
+                                                    <li>Requires high-deductible health plan</li>
+                                                    <li>Can be used as retirement account after age 65</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Those with high-deductible health plans</li>
+                                                    <li>Those who can pay current medical expenses out-of-pocket</li>
+                                                    <li>Long-term investors seeking additional tax advantages</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>529 College Savings Plan</td>
+                                            <td>
+                                                <ul>
+                                                    <li>Tax-free growth and withdrawals for qualified education expenses</li>
+                                                    <li>State tax deductions or credits in some states</li>
+                                                    <li>High contribution limits</li>
+                                                    <li>Account owner maintains control</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Parents, grandparents, or others saving for education</li>
+                                                    <li>Those wanting to maintain control of funds while gifting</li>
+                                                    <li>Those wanting to front-load education savings (5-year gift tax averaging)</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTaxable">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTaxable" aria-expanded="false" aria-controls="collapseTaxable">
+                            Taxable Accounts
+                        </button>
+                    </h2>
+                    <div id="collapseTaxable" class="accordion-collapse collapse" aria-labelledby="headingTaxable" data-bs-parent="#accountsAccordion">
+                        <div class="accordion-body">
+                            <p>While taxable accounts don't provide special tax benefits, they offer flexibility and can be managed to minimize tax impact.</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Account Type</th>
+                                            <th>Key Features</th>
+                                            <th>Best For</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Individual/Joint Brokerage Accounts</td>
+                                            <td>
+                                                <ul>
+                                                    <li>No contribution limits</li>
+                                                    <li>No withdrawal restrictions</li>
+                                                    <li>Capital gains tax advantages for long-term holdings</li>
+                                                    <li>Step-up in basis at death</li>
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <li>Funds needed before retirement</li>
+                                                    <li>After maxing out tax-advantaged accounts</li>
+                                                    <li>Tax-efficient investments (index funds, tax-managed funds)</li>
+                                                    <li>Tax-loss harvesting opportunities</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Asset Location Strategies</h3>
+            <p>
+                Asset location involves strategically placing investments in different account types to minimize taxes. The goal is to hold tax-inefficient investments in tax-advantaged accounts and tax-efficient investments in taxable accounts.
+            </p>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Account Type</th>
+                            <th>Ideal Investments</th>
+                            <th>Investments to Avoid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tax-Deferred Accounts<br>(Traditional 401(k), IRA)</td>
+                            <td>
+                                <ul>
+                                    <li>Taxable bonds and bond funds</li>
+                                    <li>REITs (generating non-qualified dividends)</li>
+                                    <li>High-turnover active funds</li>
+                                    <li>Investments generating ordinary income</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Tax-exempt municipal bonds</li>
+                                    <li>Low-turnover index funds</li>
+                                    <li>Investments you plan to hold long-term with appreciation potential</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tax-Free Accounts<br>(Roth 401(k), Roth IRA)</td>
+                            <td>
+                                <ul>
+                                    <li>High-growth stocks and funds</li>
+                                    <li>Aggressive investments with highest return potential</li>
+                                    <li>Assets with highest expected returns</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Tax-exempt municipal bonds</li>
+                                    <li>Low-return investments</li>
+                                    <li>Conservative investments with limited growth potential</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Taxable Accounts<br>(Brokerage)</td>
+                            <td>
+                                <ul>
+                                    <li>Tax-managed funds</li>
+                                    <li>Low-turnover index funds and ETFs</li>
+                                    <li>Individual stocks for long-term holding</li>
+                                    <li>Municipal bonds (if appropriate)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>High-turnover active funds</li>
+                                    <li>Taxable bonds and bond funds</li>
+                                    <li>REITs and other high-income investments</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Tax-Efficient Investment Vehicles</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Index Funds and ETFs</h5>
+                            <p class="card-text">These typically have lower turnover than actively managed funds, resulting in fewer capital gains distributions.</p>
+                            <p class="card-text">ETFs may offer additional tax advantages due to their creation/redemption structure.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Tax-Managed Funds</h5>
+                            <p class="card-text">Specifically designed to minimize tax consequences through strategies like:</p>
+                            <ul>
+                                <li>Harvesting losses to offset gains</li>
+                                <li>Minimizing turnover</li>
+                                <li>Avoiding dividend stocks or timing dividend payments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Municipal Bonds</h5>
+                            <p class="card-text">Interest is generally exempt from federal income tax.</p>
+                            <p class="card-text">May also be exempt from state and local taxes if the bonds were issued in your state of residence.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Direct Indexing</h5>
+                            <p class="card-text">Owning individual stocks that represent an index, allowing for:</p>
+                            <ul>
+                                <li>Targeted tax-loss harvesting</li>
+                                <li>Customization to exclude specific companies</li>
+                                <li>Tax-efficient transitions between investment strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Tax-Efficient Strategies</h3>
+            
+            <div class="accordion" id="strategiesAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTaxLoss">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTaxLoss" aria-expanded="true" aria-controls="collapseTaxLoss">
+                            Tax-Loss Harvesting
+                        </button>
+                    </h2>
+                    <div id="collapseTaxLoss" class="accordion-collapse collapse show" aria-labelledby="headingTaxLoss" data-bs-parent="#strategiesAccordion">
+                        <div class="accordion-body">
+                            <p>Tax-loss harvesting involves selling investments that have experienced a loss to offset capital gains and potentially reduce ordinary income (up to $3,000 per year).</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Key Considerations</h6>
+                                    <ul>
+                                        <li>Can be done throughout the year, not just at year-end</li>
+                                        <li>Wash sale rules prohibit buying a "substantially identical" security within 30 days before or after the sale</li>
+                                        <li>Can replace sold investments with similar (but not identical) investments to maintain market exposure</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Example</h6>
+                                    <p>
+                                        Sell Fund A with a $10,000 loss to offset $10,000 in gains from Fund B. Replace Fund A with Fund C that has similar characteristics but isn't "substantially identical" to maintain market exposure.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingHolding">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHolding" aria-expanded="false" aria-controls="collapseHolding">
+                            Holding Period Management
+                        </button>
+                    </h2>
+                    <div id="collapseHolding" class="accordion-collapse collapse" aria-labelledby="headingHolding" data-bs-parent="#strategiesAccordion">
+                        <div class="accordion-body">
+                            <p>Strategically timing investment sales to qualify for long-term capital gains rates.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Strategies</h6>
+                                    <ul>
+                                        <li>Defer sales until investments qualify for long-term treatment (>1 year)</li>
+                                        <li>Consider tax implications when rebalancing or changing investment strategy</li>
+                                        <li>Use tax-advantaged accounts for investments with expected holding periods less than one year</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Tax Savings Example</h6>
+                                    <p>
+                                        On a $10,000 gain, an investor in the 32% tax bracket would pay $3,200 in taxes on a short-term gain, but only $1,500 (15% rate) on a long-term gain—saving $1,700 by waiting just a few more days or weeks in some cases.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDonation">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDonation" aria-expanded="false" aria-controls="collapseDonation">
+                            Charitable Donation Strategies
+                        </button>
+                    </h2>
+                    <div id="collapseDonation" class="accordion-collapse collapse" aria-labelledby="headingDonation" data-bs-parent="#strategiesAccordion">
+                        <div class="accordion-body">
+                            <p>Strategic charitable giving can provide tax benefits while supporting causes you care about.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Donating Appreciated Securities</h6>
+                                    <ul>
+                                        <li>Donate long-term appreciated securities directly to charities</li>
+                                        <li>Avoid capital gains tax on the appreciation</li>
+                                        <li>Receive charitable deduction for the full market value</li>
+                                        <li>More tax-efficient than selling securities and donating cash</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Donor-Advised Funds (DAFs)</h6>
+                                    <ul>
+                                        <li>"Charitable investment account" for facilitating donations</li>
+                                        <li>Immediate tax deduction when contributing to the DAF</li>
+                                        <li>Investments grow tax-free within the DAF</li>
+                                        <li>Allows for strategic timing of tax deductions and charitable gifts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingRetirement">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRetirement" aria-expanded="false" aria-controls="collapseRetirement">
+                            Retirement Distribution Strategies
+                        </button>
+                    </h2>
+                    <div id="collapseRetirement" class="accordion-collapse collapse" aria-labelledby="headingRetirement" data-bs-parent="#strategiesAccordion">
+                        <div class="accordion-body">
+                            <p>Strategic withdrawal planning can minimize taxes during retirement.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Withdrawal Sequencing</h6>
+                                    <p>General order of withdrawals (with exceptions based on individual circumstances):</p>
+                                    <ol>
+                                        <li>Required Minimum Distributions (RMDs)</li>
+                                        <li>Taxable accounts</li>
+                                        <li>Tax-deferred accounts (Traditional IRAs, 401(k)s)</li>
+                                        <li>Tax-free accounts (Roth IRAs)</li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Roth Conversion Ladders</h6>
+                                    <ul>
+                                        <li>Convert portions of traditional IRAs to Roth IRAs during low-income years</li>
+                                        <li>Pay taxes at lower rates now for tax-free growth later</li>
+                                        <li>Spread conversions over multiple years to manage tax brackets</li>
+                                        <li>Can reduce future RMDs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingEstate">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEstate" aria-expanded="false" aria-controls="collapseEstate">
+                            Estate Planning Strategies
+                        </button>
+                    </h2>
+                    <div id="collapseEstate" class="accordion-collapse collapse" aria-labelledby="headingEstate" data-bs-parent="#strategiesAccordion">
+                        <div class="accordion-body">
+                            <p>Proper estate planning can reduce or eliminate taxes when transferring wealth to heirs.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Step-Up in Basis</h6>
+                                    <ul>
+                                        <li>Appreciated assets receive a "step-up" in cost basis to market value at death</li>
+                                        <li>Heirs can sell inherited investments with little or no capital gains tax</li>
+                                        <li>Consider which assets to hold until death vs. sell or gift during lifetime</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Strategic Gifting</h6>
+                                    <ul>
+                                        <li>Annual gift tax exclusion allows gifts up to certain limits per recipient</li>
+                                        <li>Directly paying for education or medical expenses doesn't count toward gift limits</li>
+                                        <li>529 plans allow for accelerated gifting (5 years at once)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Tax Considerations for Different Investor Types</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">High-Income Earners</h5>
+                            <ul>
+                                <li>Maximize tax-deferred and tax-free account contributions</li>
+                                <li>Consider backdoor Roth IRA strategies if income exceeds direct contribution limits</li>
+                                <li>Be aware of additional taxes (NIIT, AMT)</li>
+                                <li>Consider tax-exempt municipal bonds in taxable accounts</li>
+                                <li>Explore charitable giving strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Self-Employed/Business Owners</h5>
+                            <ul>
+                                <li>Consider retirement plans with higher contribution limits (Solo 401(k), SEP IRA)</li>
+                                <li>Explore qualified business income deduction implications</li>
+                                <li>Timing of business income and expenses</li>
+                                <li>Business structure considerations (S-Corp, LLC, etc.)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pre-Retirees (5-10 Years from Retirement)</h5>
+                            <ul>
+                                <li>Maximize catch-up contributions to retirement accounts</li>
+                                <li>Consider Roth conversion strategies before RMDs begin</li>
+                                <li>Begin tax-efficient withdrawal planning</li>
+                                <li>Review asset location across accounts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Retirees</h5>
+                            <ul>
+                                <li>Carefully plan withdrawals to manage tax brackets</li>
+                                <li>Consider qualified charitable distributions (QCDs) from IRAs</li>
+                                <li>Plan for RMDs and their tax impact</li>
+                                <li>Social Security taxation considerations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Common Tax-Efficient Investing Mistakes</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Focusing solely on pre-tax returns:</strong> Ignoring tax implications when evaluating investments
+                </li>
+                <li class="list-group-item">
+                    <strong>Poor asset location:</strong> Holding tax-inefficient investments in taxable accounts
+                </li>
+                <li class="list-group-item">
+                    <strong>Forgetting about taxes when rebalancing:</strong> Triggering unnecessary tax events
+                </li>
+                <li class="list-group-item">
+                    <strong>Waiting until year-end for tax-loss harvesting:</strong> Missing opportunities throughout the year
+                </li>
+                <li class="list-group-item">
+                    <strong>Failing to coordinate with other tax situations:</strong> Not considering the full tax picture
+                </li>
+                <li class="list-group-item">
+                    <strong>Letting the "tax tail wag the investment dog":</strong> Making poor investment decisions solely for tax reasons
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4>Continue Learning</h4>
+                    <p>Explore these related topics to enhance your investment strategy:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='diversification') }}" class="btn btn-outline-primary w-100 mb-2">Diversification</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='portfolio-theory') }}" class="btn btn-outline-primary w-100 mb-2">Portfolio Theory</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='risk-management') }}" class="btn btn-outline-primary w-100 mb-2">Risk Management</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,305 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Managing Investment Risk</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Managing Investment Risk</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Risk management is essential to successful investing. This guide explains different types of investment risks and strategies to manage them effectively.
+        </div>
+
+        <div class="mt-4">
+            <h3>Understanding Investment Risk</h3>
+            <p>
+                Investment risk is the possibility that an investment's actual return will differ from what was expected. This includes the potential to lose some or all of the original investment. While risk cannot be eliminated, it can be managed effectively.
+            </p>
+            <p>
+                A fundamental principle of investing is that higher potential returns typically come with higher risks. Understanding and managing these risks is crucial to achieving your financial goals.
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <h3>Types of Investment Risks</h3>
+            <div class="accordion" id="riskTypesAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingMarket">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMarket" aria-expanded="true" aria-controls="collapseMarket">
+                            Market Risk
+                        </button>
+                    </h2>
+                    <div id="collapseMarket" class="accordion-collapse collapse show" aria-labelledby="headingMarket" data-bs-parent="#riskTypesAccordion">
+                        <div class="accordion-body">
+                            <p>The risk that an investment will lose value due to overall market movements, regardless of the investment's individual characteristics. Also known as "systematic risk," it affects all securities in the same asset class.</p>
+                            <p><strong>Examples:</strong> Recessions, interest rate changes, geopolitical events, natural disasters</p>
+                            <p><strong>Management strategies:</strong> Asset allocation, diversification across asset classes, hedging strategies</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSpecific">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpecific" aria-expanded="false" aria-controls="collapseSpecific">
+                            Specific Risk (Unsystematic Risk)
+                        </button>
+                    </h2>
+                    <div id="collapseSpecific" class="accordion-collapse collapse" aria-labelledby="headingSpecific" data-bs-parent="#riskTypesAccordion">
+                        <div class="accordion-body">
+                            <p>Risk that affects a specific company, industry, or sector rather than the entire market. These risks can often be reduced through diversification.</p>
+                            <p><strong>Examples:</strong> Company management changes, product recalls, regulatory changes affecting a specific industry</p>
+                            <p><strong>Management strategies:</strong> Diversifying across companies and sectors, thorough research before investing</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingInflation">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInflation" aria-expanded="false" aria-controls="collapseInflation">
+                            Inflation Risk
+                        </button>
+                    </h2>
+                    <div id="collapseInflation" class="accordion-collapse collapse" aria-labelledby="headingInflation" data-bs-parent="#riskTypesAccordion">
+                        <div class="accordion-body">
+                            <p>The risk that the purchasing power of your invested money will decrease over time due to inflation. This is particularly important for fixed-income investments.</p>
+                            <p><strong>Examples:</strong> Cash holdings losing value during periods of high inflation, fixed-rate bonds underperforming during inflationary periods</p>
+                            <p><strong>Management strategies:</strong> Investing in inflation-protected securities (TIPS), real estate, stocks, commodities</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingInterest">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInterest" aria-expanded="false" aria-controls="collapseInterest">
+                            Interest Rate Risk
+                        </button>
+                    </h2>
+                    <div id="collapseInterest" class="accordion-collapse collapse" aria-labelledby="headingInterest" data-bs-parent="#riskTypesAccordion">
+                        <div class="accordion-body">
+                            <p>The risk that changes in interest rates will affect the value of investments, particularly bonds. When interest rates rise, bond prices typically fall, and vice versa.</p>
+                            <p><strong>Examples:</strong> Long-term bonds losing value when interest rates increase</p>
+                            <p><strong>Management strategies:</strong> Bond laddering, diversifying bond maturities, floating-rate bonds</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingLiquidity">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLiquidity" aria-expanded="false" aria-controls="collapseLiquidity">
+                            Liquidity Risk
+                        </button>
+                    </h2>
+                    <div id="collapseLiquidity" class="accordion-collapse collapse" aria-labelledby="headingLiquidity" data-bs-parent="#riskTypesAccordion">
+                        <div class="accordion-body">
+                            <p>The risk of not being able to buy or sell an investment quickly enough at a fair price, particularly during market stress.</p>
+                            <p><strong>Examples:</strong> Real estate, private equity, thinly-traded stocks or bonds</p>
+                            <p><strong>Management strategies:</strong> Maintaining an emergency fund, investing primarily in liquid assets, limiting alternative investments</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingCurrency">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCurrency" aria-expanded="false" aria-controls="collapseCurrency">
+                            Currency Risk
+                        </button>
+                    </h2>
+                    <div id="collapseCurrency" class="accordion-collapse collapse" aria-labelledby="headingCurrency" data-bs-parent="#riskTypesAccordion">
+                        <div class="accordion-body">
+                            <p>The risk that foreign exchange rate fluctuations will impact the value of international investments when converted back to your home currency.</p>
+                            <p><strong>Examples:</strong> International stocks or bonds decreasing in value due to unfavorable currency movements</p>
+                            <p><strong>Management strategies:</strong> Currency hedging, currency-hedged ETFs, diversifying across currencies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Risk Assessment: Understanding Your Risk Tolerance</h3>
+            <p>
+                Risk tolerance is your ability and willingness to endure fluctuations in the value of your investments. It's influenced by factors such as:
+            </p>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-calendar me-2"></i>Time Horizon</h5>
+                            <p class="card-text">The length of time until you need the money. Longer time horizons typically allow for higher risk tolerance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-cash-stack me-2"></i>Financial Situation</h5>
+                            <p class="card-text">Your income, savings, debt level, and financial obligations affect how much risk you can afford to take.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-graph-up me-2"></i>Investment Experience</h5>
+                            <p class="card-text">More experienced investors may be more comfortable with volatility and complex investment strategies.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-emoji-smile me-2"></i>Psychological Factors</h5>
+                            <p class="card-text">Your emotional reaction to market volatility and potential losses influences your suitable risk level.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Key Risk Management Strategies</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Strategy</th>
+                            <th>Description</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Diversification</td>
+                            <td>Spreading investments across different asset classes, sectors, and geographies</td>
+                            <td>All investors, especially those seeking to reduce specific risk</td>
+                        </tr>
+                        <tr>
+                            <td>Asset Allocation</td>
+                            <td>Determining the optimal mix of stocks, bonds, cash, and alternatives based on goals and risk tolerance</td>
+                            <td>Long-term investors with defined financial goals</td>
+                        </tr>
+                        <tr>
+                            <td>Dollar-Cost Averaging</td>
+                            <td>Investing fixed amounts at regular intervals, regardless of market conditions</td>
+                            <td>Investors concerned about market timing risk</td>
+                        </tr>
+                        <tr>
+                            <td>Rebalancing</td>
+                            <td>Periodically adjusting your portfolio back to target allocations</td>
+                            <td>Maintaining risk levels over time, preventing style drift</td>
+                        </tr>
+                        <tr>
+                            <td>Hedging</td>
+                            <td>Using financial instruments (options, futures) to offset potential losses</td>
+                            <td>Sophisticated investors with specific short-term risk concerns</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>Practical Risk Management Framework</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 1: Assess Your Risk Tolerance</h5>
+                            <p class="card-text">Understand your financial situation, investment time horizon, and emotional comfort with market volatility.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 2: Define Your Asset Allocation</h5>
+                            <p class="card-text">Determine the appropriate mix of stocks, bonds, cash, and alternative investments based on your goals and risk tolerance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 3: Diversify Within Asset Classes</h5>
+                            <p class="card-text">Spread investments across various sectors, industries, company sizes, and geographic regions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 4: Implement Risk Reduction Techniques</h5>
+                            <p class="card-text">Consider dollar-cost averaging, position sizing, and potentially hedging strategies for specific risks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 5: Monitor and Rebalance</h5>
+                            <p class="card-text">Regularly review your portfolio and rebalance when asset allocations drift from targets.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 6: Adjust for Life Changes</h5>
+                            <p class="card-text">Modify your risk management approach as your financial situation, goals, and time horizons evolve.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Common Risk Management Mistakes</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Focusing only on returns, not risk:</strong> Chasing high returns without considering the associated risks.
+                </li>
+                <li class="list-group-item">
+                    <strong>Panic selling during market downturns:</strong> Emotional reactions often lead to selling low and buying high.
+                </li>
+                <li class="list-group-item">
+                    <strong>Inadequate diversification:</strong> Having too many similar investments that move together in market cycles.
+                </li>
+                <li class="list-group-item">
+                    <strong>Neglecting to rebalance:</strong> Allowing portfolio drift to increase risk exposure over time.
+                </li>
+                <li class="list-group-item">
+                    <strong>Ignoring liquidity needs:</strong> Not maintaining sufficient cash or liquid investments for emergencies or opportunities.
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4>Continue Learning</h4>
+                    <p>Explore these related topics to enhance your investment risk management strategy:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='diversification') }}" class="btn btn-outline-primary w-100 mb-2">Diversification</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='portfolio-theory') }}" class="btn btn-outline-primary w-100 mb-2">Portfolio Theory</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='market-indicators') }}" class="btn btn-outline-primary w-100 mb-2">Market Indicators</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

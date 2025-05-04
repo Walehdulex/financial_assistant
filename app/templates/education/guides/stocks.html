@@ -1,0 +1,230 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Stocks Basics</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Stocks Basics</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i> This guide will teach you the fundamentals of stock investing, how stock markets work, and essential concepts every investor should understand.
+        </div>
+
+        <div class="mt-4">
+            <h3>What is a Stock?</h3>
+            <p>
+                A stock represents a share of ownership in a company. When you buy a stock, you're purchasing a small piece of that company, which makes you a shareholder. Companies issue stocks to raise money for various purposes such as expansion, developing new products, or paying off debt.
+            </p>
+            <p>
+                As a shareholder, you generally have the following rights:
+            </p>
+            <ul>
+                <li>Vote on major company decisions and board members</li>
+                <li>Receive dividends (a portion of company profits) if the company issues them</li>
+                <li>Sell your shares to another investor</li>
+            </ul>
+
+            <h3 class="mt-4">How Stock Markets Work</h3>
+            <p>
+                Stock markets are where buyers and sellers meet to trade shares of publicly listed companies. Today, most trading occurs electronically through exchanges like the New York Stock Exchange (NYSE) or the NASDAQ.
+            </p>
+            <div class="card mb-4 bg-light">
+                <div class="card-body">
+                    <h5>Key Stock Market Concepts</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li><strong>Bid Price:</strong> The highest price a buyer is willing to pay</li>
+                                <li><strong>Ask Price:</strong> The lowest price a seller is willing to accept</li>
+                                <li><strong>Market Order:</strong> An order to buy or sell at the current market price</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li><strong>Limit Order:</strong> An order to buy or sell at a specific price or better</li>
+                                <li><strong>Volume:</strong> The number of shares traded during a given period</li>
+                                <li><strong>Market Cap:</strong> The total value of a company's outstanding shares</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Types of Stocks</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Typical Characteristics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Common Stock</td>
+                            <td>The most basic form of stock ownership</td>
+                            <td>Voting rights, potential for dividends, higher risk and reward</td>
+                        </tr>
+                        <tr>
+                            <td>Preferred Stock</td>
+                            <td>Special class of shares with priority over common stock</td>
+                            <td>Typically higher dividend payouts, fewer voting rights, less price appreciation</td>
+                        </tr>
+                        <tr>
+                            <td>Growth Stocks</td>
+                            <td>Companies expected to grow at an above-average rate</td>
+                            <td>Higher P/E ratios, little or no dividends, higher volatility</td>
+                        </tr>
+                        <tr>
+                            <td>Value Stocks</td>
+                            <td>Companies trading below their intrinsic value</td>
+                            <td>Lower P/E ratios, often pay dividends, less volatility</td>
+                        </tr>
+                        <tr>
+                            <td>Dividend Stocks</td>
+                            <td>Companies that regularly pay dividends</td>
+                            <td>Steady income, often established companies, lower growth potential</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="mt-4">Understanding Stock Prices</h3>
+            <p>
+                Stock prices change constantly during trading hours based on supply and demand. Various factors influence stock prices, including:
+            </p>
+            <ul>
+                <li>Company performance (earnings, revenue growth, profitability)</li>
+                <li>Industry trends and competitive landscape</li>
+                <li>Economic factors (interest rates, inflation, GDP growth)</li>
+                <li>Market sentiment and investor psychology</li>
+                <li>Global events and news</li>
+            </ul>
+
+            <div class="mt-4">
+                <h3>Key Metrics for Evaluating Stocks</h3>
+                <div class="accordion" id="stockMetricsAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Price-to-Earnings (P/E) Ratio
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#stockMetricsAccordion">
+                            <div class="accordion-body">
+                                <p>The P/E ratio compares a company's share price to its earnings per share. It indicates how much investors are willing to pay for each dollar of earnings.</p>
+                                <p><strong>Formula:</strong> P/E Ratio = Stock Price ÷ Earnings Per Share (EPS)</p>
+                                <p><strong>Interpretation:</strong> A high P/E may indicate that investors expect higher growth in the future, while a low P/E might suggest the stock is undervalued or the company is facing challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Price-to-Book (P/B) Ratio
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#stockMetricsAccordion">
+                            <div class="accordion-body">
+                                <p>The P/B ratio compares a company's market value to its book value (assets minus liabilities).</p>
+                                <p><strong>Formula:</strong> P/B Ratio = Stock Price ÷ Book Value Per Share</p>
+                                <p><strong>Interpretation:</strong> A P/B ratio under 1 might indicate an undervalued stock, while a high P/B ratio could suggest overvaluation or that the company has intangible assets not reflected on the balance sheet.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More metrics and data would be updated soon -->
+
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3>Getting Started with Stock Investing</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 1: Set Investment Goals</h5>
+                                <p class="card-text">Define what you want to achieve with your investments, whether it's growth, income, or a combination of both. Consider your time horizon and risk tolerance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 2: Open a Brokerage Account</h5>
+                                <p class="card-text">Choose a broker based on fees, available investments, research tools, and customer service. Many online brokers offer commission-free stock trading.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 3: Research Stocks</h5>
+                                <p class="card-text">Conduct fundamental and technical analysis to identify potential investments. Consider using our platform's analysis tools to evaluate stocks.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 4: Build a Diversified Portfolio</h5>
+                                <p class="card-text">Spread your investments across different companies, sectors, and asset classes to reduce risk. Start with a few high-quality stocks or consider index funds for instant diversification.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="mt-5">
+                <h3>Common Mistakes to Avoid</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Investing without a plan</strong> - Set clear goals and develop a strategy before investing.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Chasing past performance</strong> - Past returns don't guarantee future results.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Lack of diversification</strong> - Don't put all your eggs in one basket.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Letting emotions drive decisions</strong> - Panic selling during market downturns can lock in losses.
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Ignoring fees</strong> - Even small fees can significantly impact long-term returns.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-5">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h4>Next Steps</h4>
+                        <p>Now that you understand the basics of stocks, consider exploring these related topics:</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ url_for('education.guide', topic='fundamental-analysis') }}" class="btn btn-outline-primary mb-2 w-100">Fundamental Analysis</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ url_for('education.guide', topic='technical-analysis') }}" class="btn btn-outline-primary mb-2 w-100">Technical Analysis</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ url_for('education.guide', topic='diversification') }}" class="btn btn-outline-primary mb-2 w-100">Portfolio Diversification</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

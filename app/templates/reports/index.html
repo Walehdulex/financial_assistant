@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Financial Reports</h4>
+                    <div class="btn-group">
+                        <a href="{{ url_for('reports.generate_report') }}" class="btn btn-light btn-sm">
+                            <i class="bi bi-plus-circle me-1"></i> Generate Report
+                        </a>
+                        <button type="button" class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('reports.generate_report') }}">Performance/Allocation</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('reports.generate_tax_report') }}">Tax Report</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('reports.generate_risk_report') }}">Risk Analysis</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Report type quick links -->
+                    <div class="mb-3">
+                        <div class="btn-group">
+                            <a href="{{ url_for('reports.generate_report') }}" class="btn btn-outline-primary">
+                                <i class="bi bi-file-earmark-bar-graph me-1"></i> Performance/Allocation
+                            </a>
+                            <a href="{{ url_for('reports.generate_tax_report') }}" class="btn btn-outline-warning">
+                                <i class="bi bi-file-earmark-spreadsheet me-1"></i> Tax Report
+                            </a>
+                            <a href="{{ url_for('reports.generate_risk_report') }}" class="btn btn-outline-danger">
+                                <i class="bi bi-file-earmark-bar-graph me-1"></i> Risk Analysis
+                            </a>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-tabs mb-3">
+                        <li class="nav-item">
+                            <a class="nav-link {% if not active_type %}active{% endif %}" href="{{ url_for('reports.index') }}">All Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_type == 'performance' %}active{% endif %}" href="{{ url_for('reports.index', type='performance') }}">Performance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_type == 'allocation' %}active{% endif %}" href="{{ url_for('reports.index', type='allocation') }}">Allocation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_type == 'tax' %}active{% endif %}" href="{{ url_for('reports.index', type='tax') }}">Tax</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if active_type == 'risk' %}active{% endif %}" href="{{ url_for('reports.index', type='risk') }}">Risk</a>
+                        </li>
+                    </ul>
+
+                    {% if reports %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Format</th>
+                                        <th>Date Generated</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for report in reports %}
+                                        <tr {% if report.is_archived %}class="table-secondary"{% endif %}>
+                                            <td>
+                                                <a href="{{ url_for('reports.view_report', report_id=report.id) }}">
+                                                    {{ report.title }}
+                                                    {% if report.is_archived %}<span class="badge bg-secondary ms-1">Archived</span>{% endif %}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {% if report.report_type == 'performance' %}
+                                                    <span class="badge bg-primary">Performance</span>
+                                                {% elif report.report_type == 'allocation' %}
+                                                    <span class="badge bg-success">Allocation</span>
+                                                {% elif report.report_type == 'tax' %}
+                                                    <span class="badge bg-warning">Tax</span>
+                                                {% elif report.report_type == 'risk' %}
+                                                    <span class="badge bg-danger">Risk</span>
+                                                {% else %}
+                                                    <span class="badge bg-secondary">{{ report.report_type|capitalize }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ report.format|upper }}</td>
+                                            <td>{{ report.generated_at|time_ago }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ url_for('reports.view_report', report_id=report.id) }}" class="btn btn-sm btn-outline-primary">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                    <a href="{{ url_for('reports.download_report', report_id=report.id) }}" class="btn btn-sm btn-outline-success">
+                                                        <i class="bi bi-download"></i>
+                                                    </a>
+                                                    <form action="{{ url_for('reports.archive_report', report_id=report.id) }}" method="post" class="d-inline">
+                                                        <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                                            <i class="bi bi-archive"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form action="{{ url_for('reports.delete_report', report_id=report.id) }}" method="post" class="d-inline">
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this report?')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i> No reports found. 
+                            <a href="{{ url_for('reports.generate_report') }}" class="alert-link">Generate a new report</a> to get started.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

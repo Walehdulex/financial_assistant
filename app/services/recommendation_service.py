@@ -3,6 +3,10 @@ import numpy as np
 from datetime import datetime, timedelta
 from flask_migrate import current
 
+from app.models.user import UserSettings
+
+from app.models.user import User
+
 
 class RecommendationService:
     def __init__(self, market_service, risk_service):
@@ -27,10 +31,10 @@ class RecommendationService:
 
             # Get current portfolio allocation and handle it properly
             try:
-                holdings = list(portfolio.holdings.all()) # Try different access method
-                print(f"DEBUG: Found {len(holdings)} holdings")
+                holdings = list(portfolio.holdings.all()) # Trying different access method
+                # print(f"DEBUG: Found {len(holdings)} holdings")
             except Exception as e:
-                print(f"DEBUG: Error getting holdings: {e}")
+                # print(f"DEBUG: Error getting holdings: {e}")
                 holdings = []
 
             if not holdings:
@@ -89,8 +93,8 @@ class RecommendationService:
         return None
 
     def _check_sector_allocation(self, holdings, portfolio):
-        """Generate recommendations based on sector allocation"""
-        print(f"Checking sector allocation for portfolio with {len(holdings) if holdings else 0} holdings")
+        """Generating recommendations based on sector allocation"""
+        # print(f"Checking sector allocation for portfolio with {len(holdings) if holdings else 0} holdings")
 
         recommendations = []
 
@@ -100,8 +104,8 @@ class RecommendationService:
             return recommendations
 
         # Print holdings info for debugging
-        for holding in holdings:
-            print(f"Holding: {holding.symbol if hasattr(holding, 'symbol') else 'Unknown'}")
+        # for holding in holdings:
+        #     print(f"Holding: {holding.symbol if hasattr(holding, 'symbol') else 'Unknown'}")
 
         # Getting Sector Information for each stock
         sectors = {}
@@ -120,22 +124,22 @@ class RecommendationService:
                     if stock_data and 'current_price' in stock_data:
                         value = holding.quantity * stock_data['current_price']
                         total_value += value
-                        print(f"Added ${value:.2f} for {holding.symbol} to total value")
+                        # print(f"Added ${value:.2f} for {holding.symbol} to total value")
                 except Exception as e:
                     print(f"Error calculating value for holding: {str(e)}")
 
-            print(f"Total portfolio value: ${total_value:.2f}")
+            # print(f"Total portfolio value: ${total_value:.2f}")
 
             # If no value, return empty recommendations
             if total_value <= 0:
-                print("Portfolio has no measurable value")
+                # print("Portfolio has no measurable value")
                 return recommendations
 
             # Getting Sector for each stock and calculate weight
             for holding in holdings:
                 try:
                     if not hasattr(holding, 'symbol'):
-                        print(f"Skipping holding without symbol attribute")
+                        # print(f"Skipping holding without symbol attribute")
                         continue
 
                     # Getting the company overview from Alpha Vantage
@@ -145,127 +149,37 @@ class RecommendationService:
                         'apikey': self.market_service.api_key
                     }
 
-                    # Rest of your sector allocation code...
-                    # Remember to use proper try/except blocks
 
                 except Exception as e:
-                    print(
-                        f"Error getting sector information for {holding.symbol if hasattr(holding, 'symbol') else 'unknown'}: {str(e)}")
-
-            # Rest of your sector allocation logic
+                    print(f"Error getting sector information for {holding.symbol if hasattr(holding, 'symbol') else 'unknown'}: {str(e)}")
 
         except Exception as e:
             print(f"Error in sector allocation: {str(e)}")
 
         return recommendations
 
-    # def _check_sector_allocation(self, holdings, portfolio):
-    #     recommendations = []
-    #
-    #     if not holdings:
-    #         return recommendations
-    #
-    #     #Getting Sector Information for each stock
-    #     sectors = {}
-    #     sector_weights = {}
-    #     total_value = 0
-    #
-    #
-    #     try:
-    #         #Getting total portfolio value
-    #         for holding in holdings:
-    #             try:
-    #                 stock_data = self.market_service.get_stock_data(holding.symbol)
-    #                 if stock_data:
-    #                     total_value += (holding.quantity * stock_data['current_price'])
-    #             except Exception as e:
-    #                 print(f"Error calculating value for {holding.symbol}: {str(e)}")
-    #
-    #         #Getting Sector for each stock and calculate weight
-    #         for holding in holdings:
-    #             try:
-    #                 #Getting the company overview from Alpha Vantage
-    #                 params = {
-    #                     'function': 'OVERVIEW',
-    #                     'symbol': holding.symbol,
-    #                     'apikey': self.market_service.api_key
-    #                 }
-    #
-    #                 response = requests.get(self.market_service.base_url, params=params)
-    #                 data = response.json()
-    #
-    #                 #Extracting Sector Information
-    #                 if 'Sector' in data:
-    #                     sector = data['Sector']
-    #                     stock_data = self.market_service.get_stock_data(holdings.symbol)
-    #
-    #
-    #                     if stock_data:
-    #                         value = holdings.quantity * stock_data['current_price']
-    #                         weight = value / total_value if total_value > 0 else 0
-    #
-    #                         if sector in sector_weights:
-    #                             sector_weights[sector] += weight
-    #                         else:
-    #                             sector_weights[sector] = weight
-    #
-    #                         #Storing it for later
-    #                         sectors[holdings.symbol] = sector
-    #
-    #                 #Delay to avoid rate limiting
-    #                 import time
-    #                 time.sleep(1)
-    #
-    #             except Exception as e:
-    #                 print(f"Error getting sector information for {holding.symbol}: {str(e)}")
-    #
-    #
-    #
-    #         #Checking sector weights against targets
-    #         underweight_sectors = []
-    #         overweight_sectors = []
-    #
-    #         for sector, target in self.sector_targets.items():
-    #             current = sector_weights.get(sector, 0)
-    #
-    #             #Check if it is Slightly underweight
-    #             if current < target * 0.7:
-    #                 underweight_sectors.append({
-    #                     'sector': sector,
-    #                     'current': current,
-    #                     'target': target,
-    #                     'gap': target - current
-    #                 })
-    #
-    #             #Checking if significantly overweight
-    #             elif current > target * 1.3: # i.e More than 30% over target
-    #                 overweight_sectors.append({
-    #                     'sector': sector,
-    #                     'current': current,
-    #                     'target': target,
-    #                     'gap': current - target
-    #                 })
-    #         #Sorting by biggest gaps
-    #         underweight_sectors.sort(key=lambda x: x['gap'], reverse=True)
-    #         overweight_sectors.sort(key=lambda x: x['gap'], reverse=True)
-    #
-    #         #Generating recommendations for underweight sectors
-    #         for sector_data in underweight_sectors[:2]: #i.e top 2 underweights
-    #             recommendations.append({
-    #                 'type': 'sector',
-    #                 'recommendation': f"Consider adding {sector_data['sector']} stocks to your portfolio",
-    #                 'reasoning': f"Your portfolio is underweight in {sector_data['sector']} at {sector_data['current']*100:.1f}% vs target of {sector_data['target']*100:.1f}%",
-    #                 'priority': 'medium'
-    #             })
-    #     except Exception as e:
-    #         print(f"Error in sector allocation: {str(e)}")
-    #
-    #     return recommendations
-
     def _check_risk_alignment(self, portfolio, risk_data):
+        # Debug the portfolio object
+        # print(f"Portfolio ID: {portfolio.id}, User ID: {portfolio.user_id}")
+
         #Getting user's risk tolerance from user model
-        user = portfolio.user
-        user_risk_tolerance = user.risk_tolerance or 'Moderate' #Default is Moderate if not set
+        user = User.query.get(portfolio.user_id)
+
+        # getting the ACTUAL user's risk tolerance
+        user_settings = UserSettings.query.filter_by(user_id=user.id).first()
+
+        # print(f"User ID from query: {user.id}")
+        # print(f"Settings found: {user_settings is not None}")
+
+        if user_settings:
+            # print(f"Risk tolerance from DB: {user_settings.risk_tolerance}")
+            user_risk_tolerance = user_settings.risk_tolerance
+        else:
+            # print("No settings found, using default 'Moderate'")
+            user_risk_tolerance = 'Moderate'
+
+        # #Debugging my user settings
+        # print(f"User risk tolerance: {user_risk_tolerance}")
 
         #Converting user risk tolerance to numerical boundaries
         risk_tolerance_map = {
@@ -275,6 +189,10 @@ class RecommendationService:
         }
 
         tolerance_settings = risk_tolerance_map.get(user_risk_tolerance, risk_tolerance_map['Moderate'])
+
+        # # Debugging again
+        # print(f"Using tolerance settings: {tolerance_settings}")
+        # print(f"Current volatility: {risk_data['volatility'] * 100:.1f}%")
 
 
         #Checking if portfolio risk exceeds user's tolerance
@@ -356,13 +274,13 @@ class RecommendationService:
             increase_text = ", ".join([p['symbol'] for p in positions_to_increase[:3]])
             decrease_text = ", ".join([p['symbol'] for p in positions_to_decrease[:3]])
 
-            rebalance_msg = "Consider rebalancing your portfolio"
+            rebalance_msg = "Consider rebalancing your portfolio "
             if positions_to_increase:
                 rebalance_msg += f"Increase {increase_text}"
             if positions_to_increase and positions_to_decrease:
                 rebalance_msg += " and "
             if positions_to_decrease:
-                rebalance_msg += f"Decrease {decrease_text}"
+                rebalance_msg += f" Decrease {decrease_text}"
 
             return {
                 'type': 'rebalance',
@@ -386,6 +304,169 @@ class RecommendationService:
                     'priority': 'medium'
                 })
         return recommendations
+
+    def _generate_sector_recommendations(self, portfolio, risk_tolerance, preferred_sectors=None):
+        """Generating recommendations based on sector allocation"""
+        recommendations = []
+
+        # Skipping if portfolio is empty
+        holdings = list(portfolio.holdings.all())
+        if not holdings:
+            return recommendations
+
+        # Getting all the symbols
+        symbols = [holding.symbol for holding in holdings]
+
+        # Gettting sector for each stock
+        sector_map = self._get_stock_sectors(symbols)
+
+        # Calculating sector allocation by value
+        total_value = 0
+        sector_values = {}
+
+        for holding in holdings:
+            symbol = holding.symbol
+            stock_data = self.market_service.get_stock_data(symbol)
+            if stock_data:
+                sector = sector_map.get(symbol, 'Unknown')
+                value = holding.quantity * stock_data['current_price']
+
+                if sector not in sector_values:
+                    sector_values[sector] = 0
+
+                sector_values[sector] += value
+                total_value += value
+
+        # Calculating percentages
+        sector_allocation = {}
+        for sector, value in sector_values.items():
+            sector_allocation[sector] = value / total_value if total_value > 0 else 0
+
+        # Debugging output
+        # # print("Current sector allocation:")
+        # for sector, allocation in sector_allocation.items():
+        #     print(f"  {sector}: {allocation:.2%}")
+
+        # Identifying underrepresented sectors (less than 5%)
+        underrepresented = []
+        major_sectors = ['Technology', 'Healthcare', 'Financials', 'Consumer Defensive', 'Energy']
+
+        for sector in major_sectors:
+            allocation = sector_allocation.get(sector, 0)
+            if allocation < 0.05:
+                underrepresented.append(sector)
+
+        # Skipping recommendation for  sectors that are already well-represented
+        if 'Technology' in sector_allocation and sector_allocation['Technology'] >= 0.15:
+            if 'Technology' in underrepresented:
+                underrepresented.remove('Technology')
+
+        # Generating recommendations for underrepresented sectors
+        for sector in underrepresented:
+            # Skippping it if it is a preferred sector that user doesn't want
+            if preferred_sectors and sector not in preferred_sectors:
+                continue
+
+            recommendations.append({
+                'type': 'sector',
+                'sector': sector,
+                'action': f'Consider adding {sector.lower()} exposure',
+                'reasoning': f'{sector} sector is underrepresented in your portfolio',
+                'priority': 'low'
+            })
+
+            return recommendations
+
+    def _get_stock_sectors(self, symbols):
+        """Getting sectors for a list of stock symbols"""
+        sector_map = {}
+
+        # pre-defined mapping for common stocks
+        SECTOR_MAPPING = {
+            # Technology
+            'AAPL': 'Technology', 'MSFT': 'Technology', 'GOOGL': 'Technology',
+            'GOOG': 'Technology', 'META': 'Technology', 'AMZN': 'Technology',
+            'NFLX': 'Technology', 'NVDA': 'Technology', 'AMD': 'Technology',
+            'INTC': 'Technology', 'CSCO': 'Technology', 'ORCL': 'Technology',
+            'IBM': 'Technology', 'ADBE': 'Technology', 'CRM': 'Technology',
+            'AAME': 'Technology',
+
+            # Healthcare
+            'JNJ': 'Healthcare', 'PFE': 'Healthcare', 'UNH': 'Healthcare',
+            'ABBV': 'Healthcare', 'MRK': 'Healthcare', 'TMO': 'Healthcare',
+            'ABT': 'Healthcare', 'DHR': 'Healthcare', 'BMY': 'Healthcare',
+
+            # Financials
+            'JPM': 'Financials', 'BAC': 'Financials', 'WFC': 'Financials',
+            'C': 'Financials', 'GS': 'Financials', 'MS': 'Financials',
+            'BLK': 'Financials', 'AXP': 'Financials', 'V': 'Financials',
+            'MA': 'Financials',
+
+            # Consumer Defensive
+            'PG': 'Consumer Defensive', 'KO': 'Consumer Defensive', 'PEP': 'Consumer Defensive',
+            'WMT': 'Consumer Defensive', 'COST': 'Consumer Defensive',
+
+            # Energy
+            'XOM': 'Energy', 'CVX': 'Energy', 'COP': 'Energy',
+            'SLB': 'Energy', 'EOG': 'Energy',
+
+            # Communication Services
+            'VZ': 'Communication Services', 'T': 'Communication Services',
+            'CMCSA': 'Communication Services', 'CHTR': 'Communication Services',
+            'DIS': 'Communication Services',
+
+            # Utilities
+            'NEE': 'Utilities', 'DUK': 'Utilities', 'SO': 'Utilities',
+            'D': 'Utilities', 'AEP': 'Utilities',
+
+            # Industrials
+            'HON': 'Industrials', 'UNP': 'Industrials', 'UPS': 'Industrials',
+            'BA': 'Industrials', 'CAT': 'Industrials', 'GE': 'Industrials',
+
+            # Materials
+            'LIN': 'Materials', 'APD': 'Materials', 'ECL': 'Materials',
+            'DD': 'Materials', 'DOW': 'Materials',
+
+            # Real Estate
+            'AMT': 'Real Estate', 'PLD': 'Real Estate', 'CCI': 'Real Estate',
+            'EQIX': 'Real Estate', 'PSA': 'Real Estate'
+        }
+
+        for symbol in symbols:
+            # First check our predefined mapping
+            if symbol in SECTOR_MAPPING:
+                sector_map[symbol] = SECTOR_MAPPING[symbol]
+                continue
+
+            # trying to use  API if not in predefined list
+            try:
+                params = {
+                    'function': 'OVERVIEW',
+                    'symbol': symbol,
+                    'apikey': self.market_service.api_key
+                }
+
+                response = requests.get(self.market_service.base_url, params=params)
+                data = response.json()
+
+                if 'Sector' in data:
+                    sector_map[symbol] = data['Sector']
+                else:
+                    sector_map[symbol] = 'Unknown'
+
+                # Adding to Data from Api to my mapping for future reference
+                SECTOR_MAPPING[symbol] = sector_map[symbol]
+            except Exception as e:
+                # print(f"Error getting sector for {symbol}: {e}")
+                sector_map[symbol] = 'Unknown'
+
+        # # Debugging output
+        # # print(f"Sector mapping for symbols {symbols}:")
+        # for symbol, sector in sector_map.items():
+        #     print(f"  {symbol}: {sector}")
+
+        return sector_map
+
 
 
 

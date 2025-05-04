@@ -1,0 +1,402 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Portfolio Theory</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Portfolio Theory</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Portfolio theory provides frameworks to build optimal investment portfolios that maximize returns for a given level of risk. This guide covers key concepts and practical applications.
+        </div>
+
+        <div class="mt-4">
+            <h3>Modern Portfolio Theory (MPT)</h3>
+            <p>
+                Modern Portfolio Theory, developed by Harry Markowitz in 1952, is a framework for constructing portfolios that maximize expected returns while accounting for risk tolerance. Markowitz's groundbreaking work earned him the Nobel Prize in Economics in 1990.
+            </p>
+            
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5>Key Concepts of Modern Portfolio Theory</h5>
+                    <ul>
+                        <li><strong>Risk and Return:</strong> Every investment has a trade-off between risk and potential return</li>
+                        <li><strong>Diversification Benefit:</strong> Combining assets with different correlations can reduce overall portfolio risk</li>
+                        <li><strong>Efficient Frontier:</strong> The set of optimal portfolios that offer the highest expected return for a defined level of risk</li>
+                        <li><strong>Correlation:</strong> The degree to which different assets move in relation to each other</li>
+                        <li><strong>Risk Measurement:</strong> Standard deviation (volatility) is used to quantify investment risk</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>The Efficient Frontier</h4>
+            <p>
+                The efficient frontier is a key concept in MPT that represents the set of optimal portfolios offering the highest expected return for a defined level of risk, or the lowest risk for a given level of expected return.
+            </p>
+            <p>
+                Portfolios that lie below the efficient frontier are sub-optimal because they don't provide enough return for the level of risk. Portfolios that plot above the efficient frontier are impossible, according to the theory.
+            </p>
+
+            <div class="mt-4">
+                <h3>Capital Asset Pricing Model (CAPM)</h3>
+                <p>
+                    Building on Modern Portfolio Theory, the Capital Asset Pricing Model (CAPM) was developed in the 1960s by William Sharpe, John Lintner, and Jan Mossin. CAPM is a model used to determine a theoretically appropriate required rate of return of an asset.
+                </p>
+
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <h5>The CAPM Formula</h5>
+                        <p class="mb-2">Expected Return = Risk-Free Rate + β (Market Return - Risk-Free Rate)</p>
+                        <ul>
+                            <li><strong>Expected Return:</strong> The return an investor expects from an investment</li>
+                            <li><strong>Risk-Free Rate:</strong> The return from a risk-free investment (typically Treasury bonds)</li>
+                            <li><strong>Beta (β):</strong> The volatility of a security relative to the market</li>
+                            <li><strong>Market Return:</strong> The expected return of the market as a whole</li>
+                            <li><strong>Market Risk Premium:</strong> The difference between the market return and risk-free rate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h3>Understanding Beta (β)</h3>
+                <p>
+                    Beta measures the volatility or systematic risk of a security or portfolio compared to the market as a whole. It's a key concept in portfolio theory.
+                </p>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Beta Value</th>
+                                <th>What It Means</th>
+                                <th>Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>β = 1.0</td>
+                                <td>Moves exactly with the market</td>
+                                <td>Index funds tracking the overall market</td>
+                            </tr>
+                            <tr>
+                                <td>β > 1.0</td>
+                                <td>More volatile than the market</td>
+                                <td>Technology stocks, small-cap stocks</td>
+                            </tr>
+                            <tr>
+                                <td>β < 1.0</td>
+                                <td>Less volatile than the market</td>
+                                <td>Utility stocks, consumer staples</td>
+                            </tr>
+                            <tr>
+                                <td>β = 0</td>
+                                <td>No correlation with the market</td>
+                                <td>Some alternative investments</td>
+                            </tr>
+                            <tr>
+                                <td>β < 0</td>
+                                <td>Moves in the opposite direction of the market</td>
+                                <td>Some precious metals, certain hedge strategies</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3>Risk-Adjusted Performance Measures</h3>
+                <p>
+                    Several metrics have been developed to evaluate investment performance while accounting for risk:
+                </p>
+
+                <div class="accordion" id="performanceAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSharpe">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSharpe" aria-expanded="true" aria-controls="collapseSharpe">
+                                Sharpe Ratio
+                            </button>
+                        </h2>
+                        <div id="collapseSharpe" class="accordion-collapse collapse show" aria-labelledby="headingSharpe" data-bs-parent="#performanceAccordion">
+                            <div class="accordion-body">
+                                <p>Developed by William Sharpe, this ratio measures excess return per unit of risk.</p>
+                                <p><strong>Formula:</strong> Sharpe Ratio = (Portfolio Return - Risk-Free Rate) / Portfolio Standard Deviation</p>
+                                <p><strong>Interpretation:</strong> Higher Sharpe ratios indicate better risk-adjusted returns. A ratio above 1.0 is generally considered good.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTreynor">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTreynor" aria-expanded="false" aria-controls="collapseTreynor">
+                                Treynor Ratio
+                            </button>
+                        </h2>
+                        <div id="collapseTreynor" class="accordion-collapse collapse" aria-labelledby="headingTreynor" data-bs-parent="#performanceAccordion">
+                            <div class="accordion-body">
+                                <p>Similar to the Sharpe ratio but uses beta instead of standard deviation as the risk measure.</p>
+                                <p><strong>Formula:</strong> Treynor Ratio = (Portfolio Return - Risk-Free Rate) / Portfolio Beta</p>
+                                <p><strong>Interpretation:</strong> Measures returns earned in excess of that which could have been earned on a risk-free investment per unit of market risk.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingJensen">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJensen" aria-expanded="false" aria-controls="collapseJensen">
+                                Jensen's Alpha
+                            </button>
+                        </h2>
+                        <div id="collapseJensen" class="accordion-collapse collapse" aria-labelledby="headingJensen" data-bs-parent="#performanceAccordion">
+                            <div class="accordion-body">
+                                <p>Measures the excess return that a portfolio generates over its expected return given its level of systematic risk.</p>
+                                <p><strong>Formula:</strong> Alpha = Portfolio Return - [Risk-Free Rate + β(Market Return - Risk-Free Rate)]</p>
+                                <p><strong>Interpretation:</strong> Positive alpha indicates the portfolio has performed better than expected given its risk level.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingInformation">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInformation" aria-expanded="false" aria-controls="collapseInformation">
+                                Information Ratio
+                            </button>
+                        </h2>
+                        <div id="collapseInformation" class="accordion-collapse collapse" aria-labelledby="headingInformation" data-bs-parent="#performanceAccordion">
+                            <div class="accordion-body">
+                                <p>Measures a portfolio manager's ability to generate excess returns relative to a benchmark.</p>
+                                <p><strong>Formula:</strong> Information Ratio = (Portfolio Return - Benchmark Return) / Tracking Error</p>
+                                <p><strong>Interpretation:</strong> Higher ratios indicate consistent outperformance relative to the benchmark.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3>Portfolio Optimization Strategies</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Mean-Variance Optimization</h5>
+                                <p class="card-text">The original approach from Modern Portfolio Theory that seeks to minimize variance for a given level of expected return.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Risk Parity</h5>
+                                <p class="card-text">Allocates investments based on risk contribution rather than capital. Each asset class contributes equally to overall portfolio risk.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Factor-Based Investing</h5>
+                                <p class="card-text">Targets specific risk factors (e.g., value, momentum, quality) that have historically delivered superior risk-adjusted returns.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Black-Litterman Model</h5>
+                                <p class="card-text">Combines market equilibrium returns with investor views to create a more stable and intuitive portfolio allocation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3>Practical Applications of Portfolio Theory</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Strategic Asset Allocation:</strong> Determining the optimal long-term mix of asset classes based on goals and risk tolerance
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Portfolio Rebalancing:</strong> Maintaining risk levels by periodically adjusting allocations back to targets
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Manager Selection and Evaluation:</strong> Using risk-adjusted performance metrics to assess investment managers
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Risk Budgeting:</strong> Allocating risk across different investments or strategies
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Portfolio Construction:</strong> Building diversified portfolios with optimal risk-return characteristics
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-5">
+                <h3>Limitations of Traditional Portfolio Theory</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Assumes normal distribution of returns:</strong> In reality, financial markets often experience "fat tails" with more extreme events than predicted
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Relies on historical data:</strong> Past performance may not predict future results, especially during regime changes
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Assumes static correlations:</strong> Asset correlations tend to increase during market stress when diversification is most needed
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Ignores investor behavior:</strong> Doesn't account for behavioral biases that affect investment decisions
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Simplifies market dynamics:</strong> Does not fully capture complex market structures and liquidity constraints
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-5">
+                <h3>Modern Extensions to Portfolio Theory</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Post-Modern Portfolio Theory (PMPT)</h5>
+                                <p class="card-text">Extends MPT by using downside risk (rather than standard deviation) as the risk measure, better aligning with investor preferences to avoid losses.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Behavioral Portfolio Theory</h5>
+                                <p class="card-text">Incorporates investor psychology and behavioral biases into portfolio construction, recognizing that investors often don't act rationally.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Adaptive Asset Allocation</h5>
+                                <p class="card-text">Dynamically adjusts portfolio allocations based on changing market conditions, attempting to overcome the limitations of static allocations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Liability-Driven Investing (LDI)</h5>
+                                <p class="card-text">Focuses on meeting specific future liabilities rather than maximizing returns, commonly used by pension funds and institutions with defined obligations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3>Building Your Portfolio: Practical Steps</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 1: Define Investment Objectives</h5>
+                                <p class="card-text">Clarify your goals, time horizon, and risk tolerance to establish the framework for your portfolio strategy.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 2: Determine Asset Allocation</h5>
+                                <p class="card-text">Based on your objectives, decide on the appropriate mix of stocks, bonds, cash, and alternative investments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 3: Select Investment Vehicles</h5>
+                                <p class="card-text">Choose specific investments (index funds, ETFs, individual securities) for each asset class in your allocation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 4: Implement Risk Management</h5>
+                                <p class="card-text">Apply diversification principles, consider correlations, and potentially use hedging strategies to manage portfolio risk.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 5: Monitor and Rebalance</h5>
+                                <p class="card-text">Regularly review your portfolio's performance and rebalance when allocations drift significantly from targets.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Step 6: Adjust as Life Changes</h5>
+                                <p class="card-text">Update your portfolio strategy as your financial situation, goals, and time horizon evolve over time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h3>Common Portfolio Construction Mistakes</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Inadequate diversification:</strong> Concentrating too much in a few investments or correlated asset classes
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Overemphasis on returns without considering risk:</strong> Chasing performance without understanding the risk being taken
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Neglecting to rebalance:</strong> Allowing portfolio drift to change the risk profile over time
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Ignoring costs:</strong> Not considering the impact of fees, taxes, and trading costs on net returns
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Emotional decision-making:</strong> Making portfolio changes based on fear, greed, or market noise rather than long-term strategy
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Misalignment with goals:</strong> Building a portfolio that doesn't match your specific financial objectives and constraints
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-5">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h4>Continue Learning</h4>
+                        <p>Explore these related topics to deepen your understanding of portfolio management:</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ url_for('education.guide', topic='diversification') }}" class="btn btn-outline-primary w-100 mb-2">Diversification</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ url_for('education.guide', topic='risk-management') }}" class="btn btn-outline-primary w-100 mb-2">Risk Management</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ url_for('education.guide', topic='market-indicators') }}" class="btn btn-outline-primary w-100 mb-2">Market Indicators</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

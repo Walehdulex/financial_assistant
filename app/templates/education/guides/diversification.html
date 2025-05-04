@@ -1,0 +1,230 @@
+{% extends "education/base_education.html" %}
+
+{% block education_content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Why Diversification Matters</h4>
+    </div>
+    <div class="card-body">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('education.resources') }}">Education Center</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Why Diversification Matters</li>
+            </ol>
+        </nav>
+
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Diversification is one of the most important concepts in investing. Learn why spreading your investments across different assets is crucial for managing risk and optimizing returns.
+        </div>
+
+        <div class="mt-4">
+            <h3>What is Diversification?</h3>
+            <p>
+                Diversification is the strategy of spreading your investments across various asset classes, industries, and geographic regions to reduce risk. It's based on the principle that different investments tend to perform differently under the same market conditions.
+            </p>
+            <p>
+                Think of it as the investment version of the age-old wisdom: "Don't put all your eggs in one basket."
+            </p>
+        </div>
+
+        <div class="mt-4">
+            <h3>Why Diversification is Essential</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-shield me-2"></i>Risk Reduction</h5>
+                            <p class="card-text">By spreading investments across different assets, you reduce the impact of any single investment's poor performance on your overall portfolio.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-graph-up-arrow me-2"></i>Return Optimization</h5>
+                            <p class="card-text">Diversification helps you capture returns from different market segments and potentially improve your risk-adjusted returns over time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-clock-history me-2"></i>Long-term Stability</h5>
+                            <p class="card-text">A well-diversified portfolio tends to be more stable over long periods, making it easier to stay invested during market turbulence.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-arrow-left-right me-2"></i>Market Cycle Management</h5>
+                            <p class="card-text">Different assets perform differently across economic cycles. Diversification helps your portfolio weather various market conditions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Types of Diversification</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Asset Class Diversification</td>
+                            <td>Spreading investments across different types of assets</td>
+                            <td>Stocks, bonds, real estate, commodities</td>
+                        </tr>
+                        <tr>
+                            <td>Sector Diversification</td>
+                            <td>Investing across different industry sectors</td>
+                            <td>Technology, healthcare, financial services, consumer goods</td>
+                        </tr>
+                        <tr>
+                            <td>Geographic Diversification</td>
+                            <td>Investing in different regions or countries</td>
+                            <td>U.S., international developed markets, emerging markets</td>
+                        </tr>
+                        <tr>
+                            <td>Market Cap Diversification</td>
+                            <td>Investing in companies of different sizes</td>
+                            <td>Large-cap, mid-cap, small-cap stocks</td>
+                        </tr>
+                        <tr>
+                            <td>Style Diversification</td>
+                            <td>Blending different investment approaches</td>
+                            <td>Growth investing, value investing, income-focused strategies</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3>The Science Behind Diversification</h3>
+            <p>
+                Diversification works because of correlation, which measures how investments move in relation to each other. When building a portfolio:
+            </p>
+            <ul>
+                <li><strong>Positive correlation (close to +1):</strong> Assets that tend to move in the same direction</li>
+                <li><strong>Negative correlation (close to -1):</strong> Assets that tend to move in opposite directions</li>
+                <li><strong>No correlation (close to 0):</strong> Assets that move independently of each other</li>
+            </ul>
+            <p>
+                The key to effective diversification is combining assets with low or negative correlations to each other, which helps reduce overall portfolio volatility.
+            </p>
+            <div class="card bg-light mb-4">
+                <div class="card-body">
+                    <h5>Modern Portfolio Theory</h5>
+                    <p>
+                        Developed by economist Harry Markowitz in 1952, Modern Portfolio Theory (MPT) provides a mathematical framework for assembling a portfolio of assets that maximizes expected return for a given level of risk. The theory demonstrates that diversification can reduce portfolio risk without sacrificing returns.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Common Diversification Mistakes</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Over-diversification:</strong> Having too many similar investments can reduce returns without meaningfully decreasing risk.
+                </li>
+                <li class="list-group-item">
+                    <strong>False diversification:</strong> Owning multiple investments that behave similarly (like several tech stocks) is not true diversification.
+                </li>
+                <li class="list-group-item">
+                    <strong>Home country bias:</strong> Investing primarily in your home country and missing global opportunities.
+                </li>
+                <li class="list-group-item">
+                    <strong>Neglecting rebalancing:</strong> Failing to periodically adjust your portfolio back to target allocations.
+                </li>
+                <li class="list-group-item">
+                    <strong>Ignoring costs:</strong> Diversifying without considering fees and tax implications.
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-5">
+            <h3>How to Create a Diversified Portfolio</h3>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 1: Define Your Investment Goals and Timeline</h5>
+                            <p class="card-text">Your investment horizon, risk tolerance, and financial objectives should guide your diversification strategy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 2: Allocate Across Asset Classes</h5>
+                            <p class="card-text">Determine the mix of stocks, bonds, cash, and alternative investments appropriate for your situation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 3: Diversify Within Asset Classes</h5>
+                            <p class="card-text">Spread investments across sectors, geographies, and investment styles within each asset class.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 4: Consider Using Investment Vehicles</h5>
+                            <p class="card-text">ETFs and mutual funds can provide instant diversification, especially for investors with limited capital.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 5: Regularly Rebalance Your Portfolio</h5>
+                            <p class="card-text">Review and adjust your allocations periodically to maintain your desired level of diversification.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 6: Monitor and Adapt</h5>
+                            <p class="card-text">As your goals and market conditions change, be prepared to revise your diversification strategy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4>Continue Learning</h4>
+                    <p>Explore these related topics to deepen your understanding of effective portfolio management:</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='risk-management') }}" class="btn btn-outline-primary w-100 mb-2">Risk Management</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='portfolio-theory') }}" class="btn btn-outline-primary w-100 mb-2">Portfolio Theory</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ url_for('education.guide', topic='tax-strategies') }}" class="btn btn-outline-primary w-100 mb-2">Tax-Efficient Investing</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

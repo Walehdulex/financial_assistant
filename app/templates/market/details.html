@@ -128,19 +128,27 @@
        <div class="modal-content">
            <div class="modal-header bg-primary text-white">
                <h5 class="modal-title">Add {{ symbol }} to Portfolio</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               <button type="button" class="btn-close btn-close-white"  data-bs-dismiss="modal" aria-label="Close"></button>
            </div>
            <div class="modal-body">
                <form id="add-to-portfolio-form">
                    <div class="mb-3">
                        <label for="quantity" class="form-label">Quantity</label>
-                       <input type="number" class="form-control" id="quantity" min="1" value="1" required>
+                       <input type="number" class="form-control" id="quantity" min="0.001" step="0.001" value="1" required>
+                       <small class="text-muted">Fractional shares supported(min: 0.001)</small>
                    </div>
-                   <button type="submit" class="btn btn-primary">Add to Portfolio</button>
+                   <div class="d-flex justify-content-end">
+                       <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                       <button type="submit" class="btn btn-primary">Add to Portfolio</button>
+                   </div>
                </form>
            </div>
        </div>
    </div>
 </div>
+ {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='stock-details.js') }}"></script>
+{% endblock %}
 
 {% endblock %}

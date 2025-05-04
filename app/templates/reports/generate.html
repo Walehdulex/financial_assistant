@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Generate New Report</h4>
+                </div>
+                <div class="card-body">
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle me-2"></i> {{ error }}
+                        </div>
+                    {% endif %}
+                    
+                    <form action="{{ url_for('reports.generate_report') }}" method="post">
+                        <div class="mb-3">
+                            <label for="report_type" class="form-label">Report Type</label>
+                            <select class="form-select" id="report_type" name="report_type" required>
+                                <option value="">Select a report type</option>
+                                <option value="performance">Performance Report</option>
+                                <option value="allocation">Allocation Report</option>
+                                <option value="tax">Tax Report</option>
+                                <option value="risk">Risk Analysis Report</option>
+                            </select>
+                            <div class="form-text">Choose the type of report you want to generate.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="portfolio_id" class="form-label">Portfolio</label>
+                            <select class="form-select" id="portfolio_id" name="portfolio_id" required>
+                                <option value="all">All Portfolios</option>
+                                {% for portfolio in portfolios %}
+                                    <option value="{{ portfolio.id }}">{{ portfolio.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">Select a portfolio or choose "All Portfolios" for a combined report.</div>
+                        </div>
+                        
+                        <div class="mb-3 d-none" id="dateRangeContainer">
+                            <label class="form-label">Date Range</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select class="form-select" id="date_range" name="date_range">
+                                        <option value="1m">Last Month</option>
+                                        <option value="3m">Last 3 Months</option>
+                                        <option value="6m">Last 6 Months</option>
+                                        <option value="1y" selected>Last Year</option>
+                                        <option value="all">All Time</option>
+                                        <option value="custom">Custom Range</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 d-none" id="customDateContainer">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="start_date" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="start_date" name="start_date">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="end_date" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="end_date" name="end_date">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-file-earmark-bar-graph me-1"></i> Generate Report
+                            </button>
+                            <a href="{{ url_for('reports.index') }}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const reportTypeSelect = document.getElementById('report_type');
+    const dateRangeContainer = document.getElementById('dateRangeContainer');
+    const dateRangeSelect = document.getElementById('date_range');
+    const customDateContainer = document.getElementById('customDateContainer');
+    const reportForm = document.querySelector('form[action*="generate_report"]');
+    
+    reportTypeSelect.addEventListener('change', function() {
+        if (this.value === 'performance') {
+            dateRangeContainer.classList.remove('d-none');
+        } else {
+            dateRangeContainer.classList.add('d-none');
+            customDateContainer.classList.add('d-none');
+        }
+    });
+    
+    dateRangeSelect.addEventListener('change', function() {
+        if (this.value === 'custom') {
+            customDateContainer.classList.remove('d-none');
+        } else {
+            customDateContainer.classList.add('d-none');
+        }
+    });
+
+    reportForm.addEventListener('submit', function(e) {
+        if (reportTypeSelect.value === 'tax') {
+            e.preventDefault();
+            window.location.href = "{{ url_for('reports.generate_tax_report') }}";
+            return false;
+        } else if (reportTypeSelect.value === 'risk') {
+            e.preventDefault();
+            window.location.href = "{{ url_for('reports.generate_risk_report') }}";
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}

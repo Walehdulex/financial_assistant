@@ -1,0 +1,113 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Recommendation Analytics</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Recommendation Type Effectiveness</div>
+                <div class="card-body">
+                    <canvas id="recommendationTypeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Follow-Through Rate</div>
+                <div class="card-body">
+                    <canvas id="followThroughChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Top Rated Recommendations</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                    <th>Avg Rating</th>
+                                    <th>Times Shown</th>
+                                    <th>Follow Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rec in top_recommendations %}
+                                <tr>
+                                    <td>{{ rec.recommendation_type }}</td>
+                                    <td>{{ rec.recommendation_action }}</td>
+                                    <td>{{ rec.avg_rating | round(2) }}</td>
+                                    <td>{{ rec.times_shown }}</td>
+                                    <td>{{ rec.follow_rate | round(2) }}%</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Recommendation type effectiveness chart
+        const typeCtx = document.getElementById('recommendationTypeChart').getContext('2d');
+        new Chart(typeCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ recommendation_types | tojson }},
+                datasets: [{
+                    label: 'Average Rating',
+                    data: {{ avg_ratings | tojson }},
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)'
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+
+        // Follow-through rate chart
+        const followCtx = document.getElementById('followThroughChart').getContext('2d');
+        new Chart(followCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Followed', 'Not Followed'],
+                datasets: [{
+                    data: [{{ follow_through_rate | tojson }}, 100 - {{ follow_through_rate | tojson }}],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(211, 211, 211, 0.6)'
+                    ]
+                }]
+            }
+        });
+    });
+</script>
+{% endblock %}
